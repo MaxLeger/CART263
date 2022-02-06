@@ -11,6 +11,8 @@ MAIN JS CODE:
 
 "use strict";
 
+let state = `register`;
+
 
 let spyProfile = {
   name: `**REDACTED**`,
@@ -24,6 +26,7 @@ let instrumentData = undefined;
 let objectData = undefined;
 let tarotData = undefined;
 let celebritiesData = undefined;
+let explosionGif;
 
 let selfdestructSFX;
 
@@ -34,6 +37,8 @@ function preload() {
   celebritiesData = loadJSON('https://raw.githubusercontent.com/dariusk/corpora/master/data/humans/celebrities.json');
 
   selfdestructSFX = loadSound('assets/sounds/selfdestruct.wav'); // Loads selfdestruct sound effect
+
+  explosionGif = loadImage("assets/images/explosion.gif");
 
 
 }
@@ -50,19 +55,28 @@ function setup() {
       spyProfile.archNemisis = data.archNemisis
       spyProfile.secretWeapon = data.secretWeapon;
       spyProfile.password = data.password;
-      music();
-
-      // setTimeout(windowCloses,8000);
-
     }
-
   } else {
     generateSpyProfile();
   }
 }
 
+// Indication of the state
+function statemachine() {
+  if (state === `register`) {
+    draw();
+    keyPressed()
+
+
+  } else if (state === `explosion`) {
+    drawExplosion();
+  }
+}
+
+
+
 function generateSpyProfile() {
-        selfdestructSFX.play();
+  selfdestructSFX.play();
   spyProfile.name = prompt(`What is your name?`);
   let instrument = random(instrumentData.instruments);
   spyProfile.alias = `The ${instrument}`;
@@ -70,7 +84,7 @@ function generateSpyProfile() {
   spyProfile.secretWeapon = random(objectData.objects);
   let card = random(tarotData.tarot_interpretations);
   spyProfile.password = random(card.keywords);
-  localStorage.setItem('data_spy',JSON.stringify(spyProfile));
+  localStorage.setItem('data_spy', JSON.stringify(spyProfile));
 
 }
 
@@ -82,8 +96,8 @@ function draw() {
   Alias: ${spyProfile.alias}
   Secret Weapon: ${spyProfile.secretWeapon}
   Arch Nemesis: ${spyProfile.archNemisis}
-  Password: ${spyProfile.password}`;
-
+  Password: ${spyProfile.password}
+  Press: 'RETURN'`;
 
   push();
   textFont(`Bold, monospace`);
@@ -96,15 +110,24 @@ function draw() {
 
 }
 
+// Old music
+// function music() {
+//   if (!selfdestructSFX.isPlaying()) {
+//     selfdestructSFX.play();
+//   }
+// }
+
+
 function music() {
-  if (!selfdestructSFX.isPlaying()){
+  if (!selfdestructSFX.isPlaying()) {
     selfdestructSFX.play();
   }
 }
 
-// function showExplosion(){
-//   window.close();
-// }
+
+function showExplosion() {
+  state = 'explosion';
+}
 
 function mousePressed() {
   if (mouseX < 10) {
@@ -112,4 +135,16 @@ function mousePressed() {
     spyProfile.name = undefined;
 
   }
+}
+
+function keyPressed() {
+  if (keyCode === RETURN) {
+    music();
+    setTimeout(showExplosion, 8000);
+  }
+}
+
+function drawExplosion() {
+  image(explosionGif, 50, 50);
+
 }
