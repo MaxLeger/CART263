@@ -13,7 +13,6 @@ MAIN JS CODE:
 
 let state = `register`;
 
-
 let spyProfile = {
   name: `**REDACTED**`,
   alias: `**REDACTED**`,
@@ -31,6 +30,7 @@ let explosionGif;
 let selfdestructSFX;
 
 function preload() {
+  // Loads the JSON data lists
   instrumentData = loadJSON('https://raw.githubusercontent.com/dariusk/corpora/master/data/music/instruments.json');
   objectData = loadJSON('https://raw.githubusercontent.com/dariusk/corpora/master/data/objects/objects.json');
   tarotData = loadJSON('https://raw.githubusercontent.com/dariusk/corpora/master/data/divination/tarot_interpretations.json');
@@ -44,12 +44,14 @@ function preload() {
 }
 
 function setup() {
+  // Creates the canvas
   createCanvas(windowWidth, windowHeight);
 
-  let data = JSON.parse(localStorage.getItem('data_spy'));
+  let data = JSON.parse(localStorage.getItem('data_spy')); //Stores data for the profile
   if (data !== null) {
-    let password = prompt('Password?');
-    if (password === data.password) {
+    let password = prompt('Password?'); //Ask the password prompt
+    if (password === data.password) { // Verifies if the password is correct
+      // Associates the data
       spyProfile.name = data.name;
       spyProfile.alias = data.alias;
       spyProfile.archNemisis = data.archNemisis
@@ -77,18 +79,19 @@ function statemachine() {
 
 function generateSpyProfile() {
   selfdestructSFX.play();
-  spyProfile.name = prompt(`What is your name?`);
-  let instrument = random(instrumentData.instruments);
+  spyProfile.name = prompt(`What is your name?`); //Ask the Name prompt
+  let instrument = random(instrumentData.instruments); // Associate a random data point of the instrument data base
   spyProfile.alias = `The ${instrument}`;
-  spyProfile.archNemisis = random(celebritiesData.celebrities);
-  spyProfile.secretWeapon = random(objectData.objects);
-  let card = random(tarotData.tarot_interpretations);
+  spyProfile.archNemisis = random(celebritiesData.celebrities); // Associate a random data point of the celebrity data base
+  spyProfile.secretWeapon = random(objectData.objects); // Associate a random data point of the objects data base
+  let card = random(tarotData.tarot_interpretations); // Associate a random data point of the Tarot data base
   spyProfile.password = random(card.keywords);
   localStorage.setItem('data_spy', JSON.stringify(spyProfile));
 
 }
 
 function draw() {
+  // function which draws the spy profile
   background(255);
 
   let profile = `**CONFIDENTIAL!**
@@ -110,15 +113,8 @@ function draw() {
 
 }
 
-// Old music
-// function music() {
-//   if (!selfdestructSFX.isPlaying()) {
-//     selfdestructSFX.play();
-//   }
-// }
-
-
 function music() {
+  // fuction which plays thr music
   if (!selfdestructSFX.isPlaying()) {
     selfdestructSFX.play();
   }
@@ -126,10 +122,12 @@ function music() {
 
 
 function showExplosion() {
+  // function that changes the state
   state = 'explosion';
 }
 
 function mousePressed() {
+  // function that allows the user to reset the profile by redifining the spy name.
   if (mouseX < 10) {
     localStorage.removeItem('data_spy');
     spyProfile.name = undefined;
@@ -138,6 +136,7 @@ function mousePressed() {
 }
 
 function keyPressed() {
+  // Activates the SFX and countdown to the changed state.
   if (keyCode === RETURN) {
     music();
     setTimeout(showExplosion, 8000);
@@ -145,6 +144,7 @@ function keyPressed() {
 }
 
 function drawExplosion() {
+  // Draws the explosion
   image(explosionGif, 50, 50);
 
 }
