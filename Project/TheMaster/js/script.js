@@ -6,14 +6,6 @@ By MGL
 MAIN JS CODE:
 ************************************************/
 
-/***********************************************
-Notes;
-
--Add a delay on sequence fight307
-
-
-
-************************************************/
 
 // The user's webcam
 let video = undefined;
@@ -33,25 +25,32 @@ let target201 = undefined;
 let target202 = undefined;
 let target203 = undefined;
 
-
-// Balloon image
-let balloon
-
+// Key images defined
 
 let introImage
 let instructions
 let introSequence
 
-
+// The Stating state
 let state = `state1`;
+
+
+// All the fighting sequence gif definitions
+
+
+// Sequence 1
 
 let fight101
 let fight102
 let fight103
 
+// Sequence 2
+
 let fight201
 let fight202
 let fight203
+
+// Sequence 3
 
 let fight301
 let fight302
@@ -61,20 +60,32 @@ let fight305
 let fight306
 let fight307
 
+// Sequence 4
+
 let fight401
 let fight402
 let fight403
+
+// Sequence 5
 
 let fight501
 let fight502
 let fight503
 let fight504
 
+// Sequence 6
+
 let fight601
+
+// Sequence 7
 
 let fight701
 let fight702
 let fight703
+
+// Final image
+
+let finalScreenImage
 
 
 // Sound effects
@@ -99,10 +110,16 @@ let endS2Audio
 
 function preload() {
 
+  // Preloads the images
+
   targetImage = loadImage("assets/images/TargetIcon.png");
   introImage = loadImage("assets/images/ShaolinIntroImage.png");
   introSequence = loadImage("assets/images/IntroSequence.gif");
   instructions = loadImage("assets/images/instructions.png");
+  finalScreenImage = loadImage("assets/images/finalScreen.png");
+
+
+  // Preloads the gif animations
 
   fight101 = loadImage("assets/images/fight101.gif");
   fight102 = loadImage("assets/images/fight102.gif");
@@ -141,8 +158,7 @@ function preload() {
   endSequence3 = loadImage("assets/images/EndSequence3.gif");
 
 
-
-  // Sound effecs
+  // Preloads the Sound effecs
 
   sfx401 = loadSound("assets/sounds/401SFX.wav");
   sfx402 = loadSound("assets/sounds/sfx402.wav");
@@ -167,10 +183,9 @@ function preload() {
   backgroundAudio = loadSound("assets/sounds/EpicMusic.mp3");
 
 
-
-
 }
 
+// Sets up all the variables of the program
 function setup() {
   createCanvas(640, 480);
 
@@ -191,16 +206,19 @@ function setup() {
     predictions = results;
   });
 
-  //Intro TargetIcon
+  //Intro Target Icon
 
   introTarget = {
-    x: 555,
-    y: 410,
-    size: 72,
-    collected: true
+    x: 555, // x location
+    y: 410, // y location
+    size: 72, // Target size
+    collected: true // Verifies is the taarget is active
   };
 
-  // The target101 definition
+  // The targets for their respective sequences
+
+  // Sequence 1 targets
+
   target101 = {
     x: 384,
     y: 150,
@@ -296,10 +314,13 @@ function setup() {
     collected: true
   };
 
-  // Important pivot with the set timer
+  // Sequence 4 targets
+
   target401 = {
-    collected: true // If you want to be in state 3, need to be false
+    collected: true
   };
+
+  // Sequence 5 targets
 
   target501 = {
     x: 380,
@@ -329,7 +350,7 @@ function setup() {
     collected: true
   };
 
-  // To put in
+  // Sequence 6 targets
 
   target601 = {
     x: 380,
@@ -337,6 +358,8 @@ function setup() {
     size: 72,
     collected: true
   };
+
+  // Sequence 7 targets
 
   target701 = {
     x: 323,
@@ -359,52 +382,49 @@ function setup() {
     collected: true
   };
 
-
 }
 
-
+// Beginning state
 function state1() {
-  background(introImage)
+  background(introImage) // Displays the image as the background
 
-  //Press a key to start the simulation [PROBLEM]
-
-  // keyPressed()
 
 }
 
-//For the intro
-function keyPressed() {
+// Activates the transition towards the next state once the mouse is pressed
+function mousePressed() {
   if (state === 'state1') {
-    state = 'introScene'
-    introSequenceAudio.play()
+    state = 'introScene' // Sets the state to introScene
+    introSequenceAudio.play() //Plays the audio of the fist non-interactive sequence
 
-    setTimeout(switchToInstructions, 8000)
+    setTimeout(switchToInstructions, 8000) // Prepares the transition function towards the next state, in the background, for the exact duration of the intro scene.
   }
 }
 
 function introScene() {
-  background(introSequence)
+  background(introSequence) // Plays the intro scene
 
-  //setTimeout with video
-  // setTimeout(switchToInstructions, 8000)
 }
 
+// serves as a transitionnal function to activate the background music and the instruction state.
 function switchToInstructions() {
 
-  introTarget.collected = false;
+  introTarget.collected = false; // Make the first target active.
 
-  state = 'instructionScene'
+  state = 'instructionScene' // Sets the state to instructionScene
 
+  // Activates the background music to be played during the entirety of the program
   if (!backgroundAudio.isPlaying()) {
     backgroundAudio.loop();
-    backgroundAudio.setVolume(0.2);
+    backgroundAudio.setVolume(0.2); // Lowers the volume of the music
   }
-
-
 
 }
 
+
 function instructionScene() {
+
+  // Veryfies if the target is active, then displays it with its respective background at its x and y location
 
   if (introTarget.collected === false) {
     background(instructions);
@@ -416,6 +436,7 @@ function instructionScene() {
     pop();
   }
 
+  // Establishes the location of the hand and fingers using the ml5 script
 
   if (predictions.length > 0) {
     let hand = predictions[0];
@@ -427,6 +448,8 @@ function instructionScene() {
     let baseX = base[0];
     let baseY = base[1];
 
+    // Displays the pointing needle at the location of the users hand
+
     push();
     noFill();
     stroke(255, 255, 255);
@@ -434,27 +457,32 @@ function instructionScene() {
     line(baseX, baseY, tipX, tipY);
     pop();
 
+    // Displays the needle base at the base of the user's hand
+
     push();
     noStroke();
     fill(255, 0, 0);
     ellipse(baseX, baseY, 20)
     pop();
 
-    //check if target101 Pop
+    //checks if target is collected
 
-    let d1 = dist(tipX, tipY, introTarget.x, introTarget.y);
+    let d1 = dist(tipX, tipY, introTarget.x, introTarget.y); // Establishe the distance limit
     if (introTarget.collected === false && d1 < introTarget.size / 2) {
-      introTarget.collected = true;
-      target101.collected = false;
+      introTarget.collected = true; // De-activates the target
+      target101.collected = false; // Activates the next target
+
+      // Transitions to the next state
       state = 'state2'
 
+      //Plays a sound effect
       punchsfx1.play();
 
     }
   }
 }
 
-
+// The function of the second state and its sequences
 function state2() {
   sequence1()
   sequence2()
@@ -462,10 +490,10 @@ function state2() {
 
 }
 
-
+// Draws what is displayed on screen
 function draw() {
   background(0);
-  statemachine();
+  statemachine(); // The state machine function creates multiple states and indicates to the draw function what should be displayed according to the currently active state.
 }
 
 // Indication of the state
@@ -484,7 +512,6 @@ function statemachine() {
 
   } else if (state === 'state3') {
     sequence4()
-
 
   } else if (state === 'state4') {
     sequence5()
@@ -519,6 +546,7 @@ function statemachine() {
 
 function sequence1() {
 
+  // Veryfies if the target is active, then displays it with its respective background at its x and y location
 
   if (target101.collected === false) {
     background(fight101);
@@ -550,6 +578,7 @@ function sequence1() {
     pop();
   }
 
+  // Establishes the location of the hand and fingers using the ml5 script
 
   if (predictions.length > 0) {
     let hand = predictions[0];
@@ -561,6 +590,8 @@ function sequence1() {
     let baseX = base[0];
     let baseY = base[1];
 
+    // Displays the pointing needle at the location of the users hand and the needle base at the base of the user's hand
+
     push();
     noFill();
     stroke(255, 255, 255);
@@ -568,13 +599,14 @@ function sequence1() {
     line(baseX, baseY, tipX, tipY);
     pop();
 
+
     push();
     noStroke();
     fill(255, 0, 0);
     ellipse(baseX, baseY, 20)
     pop();
 
-    //check if target101 Pop
+    //checks if target is collected
 
     let d1 = dist(tipX, tipY, target101.x, target101.y);
     if (target101.collected === false && d1 < target101.size / 2) {
@@ -605,6 +637,7 @@ function sequence1() {
 
 function sequence2() {
 
+  // Veryfies if the target is active, then displays it with its respective background at its x and y location
 
   if (target201.collected === false) {
     background(fight201);
@@ -636,6 +669,7 @@ function sequence2() {
     pop();
   }
 
+  // Establishes the location of the hand and fingers using the ml5 script
 
   if (predictions.length > 0) {
     let hand = predictions[0];
@@ -646,6 +680,8 @@ function sequence2() {
     let tipY = tip[1];
     let baseX = base[0];
     let baseY = base[1];
+
+    // Displays the pointing needle at the location of the users hand and the needle base at the base of the user's hand
 
     push();
     noFill();
@@ -660,7 +696,7 @@ function sequence2() {
     ellipse(baseX, baseY, 20)
     pop();
 
-    //check if target101 Pop
+    //checks if target is collected
 
     let d1 = dist(tipX, tipY, target201.x, target201.y);
     if (target201.collected === false && d1 < target201.size / 2) {
@@ -690,6 +726,7 @@ function sequence2() {
 
 function sequence3() {
 
+  // Veryfies if the target is active, then displays it with its respective background at its x and y location
 
   if (target301.collected === false) {
     background(fight301);
@@ -761,6 +798,7 @@ function sequence3() {
     pop();
   }
 
+  // Establishes the location of the hand and fingers using the ml5 script
 
   if (predictions.length > 0) {
     let hand = predictions[0];
@@ -771,6 +809,8 @@ function sequence3() {
     let tipY = tip[1];
     let baseX = base[0];
     let baseY = base[1];
+
+    // Displays the pointing needle at the location of the users hand and the needle base at the base of the user's hand
 
     push();
     noFill();
@@ -785,7 +825,7 @@ function sequence3() {
     ellipse(baseX, baseY, 20)
     pop();
 
-    //check if target101 Pop
+    //checks if target is collected
 
     let d1 = dist(tipX, tipY, target301.x, target301.y);
     if (target301.collected === false && d1 < target301.size / 2) {
@@ -844,9 +884,9 @@ function sequence3() {
 
       sfx401.play();
 
-      state = 'state3'
+      state = 'state3' // Moves on to the next state
 
-      setTimeout(switchToSequence5, 162)
+      setTimeout(switchToSequence5, 162) // Prepares the transition function towards the next state, in the background, for the exact duration of the scene.
 
     }
   }
@@ -855,45 +895,46 @@ function sequence3() {
 
 function sequence4() {
 
+  // Veryfies if the target is active, then displays it with its respective background
+
   if (target401.collected === false) {
     background(fight401);
-
-
 
   }
 }
 
 function switchToSequence5() {
-  state = 'state4'
-  sfx402.play();
-  setTimeout(switchToSequence6, 140)
+  state = 'state4' // Moves on to the next state
+  sfx402.play(); // Starts the next animation's sound effect
+  setTimeout(switchToSequence6, 140) // Prepares the transition function towards the next state, in the background, for the exact duration of the scene.
 }
 
 function sequence5() {
-  background(fight402);
+  background(fight402); // Displays the scene's background
 
 }
 
 function switchToSequence6() {
-  state = 'state5'
-  sfx403.play(); // Doesn't sound good
-  setTimeout(switchToSequence7, 2000)
+  state = 'state5' // Moves on to the next state
+  sfx403.play(); // Starts the next animation's sound effect
+  setTimeout(switchToSequence7, 2000) // Prepares the transition function towards the next state, in the background, for the exact duration of the scene.
 }
 
 function sequence6() {
-  background(fight403);
+  background(fight403); // Displays the scene's background
 
 }
 
 function switchToSequence7() {
-  state = 'state6'
+  state = 'state6' // Moves on to the next state
 
-  target501.collected = false;
+  target501.collected = false; // Make the target of the next scene active.
 
-  // punchsfx2.play(); // Doesn't sound good
 }
 
 function sequence7() {
+
+  // Veryfies if the target is active, then displays it with its respective background at its x and y location
 
   if (target501.collected === false) {
     background(fight501);
@@ -935,6 +976,7 @@ function sequence7() {
     pop();
   }
 
+  // Establishes the location of the hand and fingers using the ml5 script
 
   if (predictions.length > 0) {
     let hand = predictions[0];
@@ -945,6 +987,8 @@ function sequence7() {
     let tipY = tip[1];
     let baseX = base[0];
     let baseY = base[1];
+
+    // Displays the pointing needle at the location of the users hand and the needle base at the base of the user's hand
 
     push();
     noFill();
@@ -960,7 +1004,7 @@ function sequence7() {
     pop();
 
 
-    //check if target500s Pop
+    //checks if target is collected
 
     let d1 = dist(tipX, tipY, target501.x, target501.y);
     if (target501.collected === false && d1 < target501.size / 2) {
@@ -992,17 +1036,16 @@ function sequence7() {
     let d4 = dist(tipX, tipY, target504.x, target504.y);
     if (target504.collected === false && d4 < target504.size / 2) {
       target504.collected = true;
-      // target505.collected = false;
 
       punchsfx2.play();
 
-      state = 'state7'
+      state = 'state7' // Moves on to the next state
 
-      backgroundAudio.setVolume(0.01);
+      backgroundAudio.setVolume(0.01); // Lowers the volume of the background music
 
-      endS1Audio.play();
+      endS1Audio.play(); // Starts the next animation's sound effect
 
-      setTimeout(switchToEndSequence1, 10160)
+      setTimeout(switchToEndSequence1, 10160) // Prepares the transition function towards the next state, in the background, for the exact duration of the scene.
 
     }
 
@@ -1010,20 +1053,22 @@ function sequence7() {
 }
 
 function displayEndSequence1() {
-  background(endSequence1)
+  background(endSequence1) // Displays the scene's background
 
 }
 
 function switchToEndSequence1() {
-  state = 'state8'
+  state = 'state8' // Moves on to the next state
 
-  backgroundAudio.setVolume(0.2);
+  backgroundAudio.setVolume(0.2); // Returns the background music's volume back to normal
 
-  target601.collected = false;
+  target601.collected = false; // Activates the next scene's target
 
 }
 
 function sequence8() {
+
+  // Veryfies if the target is active, then displays it with its respective background at its x and y location
 
   if (target601.collected === false) {
     background(fight601);
@@ -1035,6 +1080,8 @@ function sequence8() {
     pop();
   }
 
+  // Establishes the location of the hand and fingers using the ml5 script
+
   if (predictions.length > 0) {
     let hand = predictions[0];
     let index = hand.annotations.indexFinger;
@@ -1044,6 +1091,8 @@ function sequence8() {
     let tipY = tip[1];
     let baseX = base[0];
     let baseY = base[1];
+
+    // Displays the pointing needle at the location of the users hand and the needle base at the base of the user's hand
 
     push();
     noFill();
@@ -1058,8 +1107,7 @@ function sequence8() {
     ellipse(baseX, baseY, 20)
     pop();
 
-
-    //check if target500s Pop
+    //checks if target is collected
 
     let d1 = dist(tipX, tipY, target601.x, target601.y);
     if (target601.collected === false && d1 < target601.size / 2) {
@@ -1067,13 +1115,13 @@ function sequence8() {
 
       punchsfx1.play();
 
-      state = 'state9'
+      state = 'state9' // Moves on to the next state
 
-      backgroundAudio.setVolume(0.01);
+      backgroundAudio.setVolume(0.01); // Lowers the volume of the background music
 
-      endS2Audio.play();
+      endS2Audio.play(); // Starts the next animation's sound effect
 
-      setTimeout(switchToEndSequence2, 15190)
+      setTimeout(switchToEndSequence2, 15190) // Prepares the transition function towards the next state, in the background, for the exact duration of the scene.
 
 
     }
@@ -1081,20 +1129,22 @@ function sequence8() {
 }
 
 function displayEndSequence2() {
-  background(endSequence2)
+  background(endSequence2) // Displays the scene's background
 
 }
 
 function switchToEndSequence2() {
-  state = 'state10'
+  state = 'state10' // Moves on to the next state
 
-  backgroundAudio.setVolume(0.2);
+  backgroundAudio.setVolume(0.2); // Returns the background music's volume back to normal
 
-  target701.collected = false;
+  target701.collected = false; // Activates the next scene's target
 
 }
 
 function sequence9() {
+
+  // Veryfies if the target is active, then displays it with its respective background at its x and y location
 
   if (target701.collected === false) {
     background(fight701);
@@ -1126,6 +1176,8 @@ function sequence9() {
     pop();
   }
 
+  // Establishes the location of the hand and fingers using the ml5 script
+
   if (predictions.length > 0) {
     let hand = predictions[0];
     let index = hand.annotations.indexFinger;
@@ -1136,6 +1188,8 @@ function sequence9() {
     let baseX = base[0];
     let baseY = base[1];
 
+    // Displays the pointing needle at the location of the users hand and the needle base at the base of the user's hand
+
     push();
     noFill();
     stroke(255, 255, 255);
@@ -1143,14 +1197,14 @@ function sequence9() {
     line(baseX, baseY, tipX, tipY);
     pop();
 
+
     push();
     noStroke();
     fill(255, 0, 0);
     ellipse(baseX, baseY, 20)
     pop();
 
-
-    //check if target500s Pop
+    //checks if target is collected
 
     let d1 = dist(tipX, tipY, target701.x, target701.y);
     if (target701.collected === false && d1 < target701.size / 2) {
@@ -1176,13 +1230,13 @@ function sequence9() {
 
       punchsfx2.play();
 
-      state = 'state11'
+      state = 'state11' // Moves on to the next state
 
-      backgroundAudio.setVolume(0.01);
+      backgroundAudio.setVolume(0.01); // Lowers the volume of the background music
 
-      endS3Audio.play();
+      endS3Audio.play(); // Starts the next animation's sound effect
 
-      setTimeout(goToFinalScreen, 12060)
+      setTimeout(goToFinalScreen, 12060) // Prepares the transition function towards the next state, in the background, for the exact duration of the scene.
 
     }
 
@@ -1190,18 +1244,17 @@ function sequence9() {
 }
 
 function displayEndSequence3() {
-  background(endSequence3)
+  background(endSequence3) // Displays the scene's background
 
 }
 
 function goToFinalScreen() {
-  state = 'state12'
+  state = 'state12' // Moves on to the next state
 
-  backgroundAudio.setVolume(0.2);
-
+  backgroundAudio.setVolume(0.2); // Returns the background music's volume back to normal
 
 }
 
 function finalScreen() {
-  background(0)
+  background(finalScreenImage) // Displays the final screen
 }
