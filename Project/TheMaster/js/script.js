@@ -112,7 +112,7 @@ function preload() {
 
   // Preloads the images
 
-  targetImage = loadImage("assets/images/TargetIcon.png");
+  targetImage = loadImage("assets/images/targetIcon.png");
   introImage = loadImage("assets/images/ShaolinIntroImage.png");
   introSequence = loadImage("assets/images/IntroSequence.gif");
   instructions = loadImage("assets/images/instructions.png");
