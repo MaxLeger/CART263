@@ -1,15 +1,11 @@
-# CART253 FINAL PROJECT: ESCAPE LAB
+# CART263 MIDTERM PROJECT: THE MASTER
 ## MGL
 
 ARTIST'S STATEMENT:
 
-The goal of this project was to craft an immersive puzzle experience. Through imagery and music, the user is transported into an unexpected situation. A sequence of panels containing animated assets sets the tone and provides context to the user. I am content with how the story unfolds through visual storytelling and the overall absurdity of the circumstances.
+For this project, I wanted to use the techniques we learned in the weekly exercise. Due to the project’s very open guidelines, for the longest time, I didn’t know what to do. It was only after using the ml5 hand pose system that I found a mechanic I was eager to work with. Having a base of the types of interaction possible with this system narrowed down my possibilities. I wanted to do something dynamic and fast pace to keep the user engaged. As I was browsing through the Wu Tang collection on YouTube, I came across the movie Shoaling Vs Lama. I had never seen the film before, and I instantly fell in love with the concept of the wondering student in search of a master. I thought that the scene in which the student first challenges the master was an ideal sequence, because it was a solid short story on its own. I knew I would be able to choregraph the fighting scene using the film’s pictures and the ml5 mechanics. At first, I tried taking screen shots and sequencing them just like a graphic novel, but it lacked visual impact and came out flat. That’s when I came up with the idea of using small video sequences instead. However, using video in Java was next to impossible. So, I bypassed the problem by instead separating each video pieces into image and sound. I knew from prior projects that the GIF format was considered equivalent to an image. This solved my problem of visual stimulation. I could now sequence GIF after GIF with either a setTimeout function with the exact duration of the sequence or an item.collected “if statement”.  The transitions between clips were now possible and I was able to display a linear narrative
 
-Going to the extremes:
--	Using very simple vector drawing: Undetailed, but obvious in appearance.
--	Using highly detailed photography.
+The idea of small but intense sequences was taken from the mechanics of Kung Fu movies themselves. In the fight scenes, a burst fight moves are shot, which leads to a set up for the next burst sequence.
 
-By mixing those two extremes, I strived to set a comical tone / a cartoon feel; reenforcing the absurdity of the situation.
-
-Once the user finds himself into to the crafting area, he is able to interact with the on-screen components and use them to further create new components. The goal was to create a simple and intuitive combination mechanics.
-I believe this objective was achieved. It was made apparent to me when my family game tested the simulation.
+In terms of artistic direction, I aimed to respect the classic Hong Kong cinema stylistic guidelines: Be bold and use red and yellow. Most Kong Fu movie posters have bold titles in either red or yellow.  The combination of those colors inspires both mastery and intensity: elements I wanted to encapsulate within my project.
+Also, I find the minimalistic approach is ideal for user compression which leads to a smoother and more intuitive experience.
