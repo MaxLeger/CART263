@@ -37,23 +37,13 @@ let target203 = undefined;
 // Balloon image
 let balloon
 
-// Arm image
-let arm
 
-// explosion
-let explosion
-
-// Backgroound music
-
-let balloonBeat
-
-// explosion popSFX
-
-let popSFX
+let introImage
+let instructions
+let introSequence
 
 
-
-let state = `state3`;
+let state = `state1`;
 
 let fight101
 let fight102
@@ -75,8 +65,21 @@ let fight401
 let fight402
 let fight403
 
+let fight501
+let fight502
+let fight503
+let fight504
+
+let fight601
+
+let fight701
+let fight702
+let fight703
+
 
 // Sound effects
+
+let backgroundAudio
 
 let punchsfx1
 let punchsfx2
@@ -88,10 +91,18 @@ let sfx401
 let sfx402
 let sfx404
 
+let endS1Audio
+let endS2Audio
+// let endS3Audio
+
+
 
 function preload() {
 
   targetImage = loadImage("assets/images/TargetIcon.png");
+  introImage = loadImage("assets/images/ShaolinIntroImage.png");
+  introSequence = loadImage("assets/images/IntroSequence.gif");
+  instructions = loadImage("assets/images/instructions.png");
 
   fight101 = loadImage("assets/images/fight101.gif");
   fight102 = loadImage("assets/images/fight102.gif");
@@ -113,11 +124,30 @@ function preload() {
   fight402 = loadImage("assets/images/fight402.gif");
   fight403 = loadImage("assets/images/fight403.gif");
 
+  fight501 = loadImage("assets/images/fight501.gif");
+  fight502 = loadImage("assets/images/fight502.gif");
+  fight503 = loadImage("assets/images/fight503.gif");
+  fight504 = loadImage("assets/images/fight504.gif");
+
+  fight601 = loadImage("assets/images/fight601.gif");
+
+  endSequence1 = loadImage("assets/images/EndSequence1.gif");
+
+  fight701 = loadImage("assets/images/fight701.gif");
+  fight702 = loadImage("assets/images/fight702.gif");
+  fight703 = loadImage("assets/images/fight703.gif");
+
+  endSequence2 = loadImage("assets/images/EndSequence2.gif");
+  endSequence3 = loadImage("assets/images/EndSequence3.gif");
+
+
+
   // Sound effecs
 
   sfx401 = loadSound("assets/sounds/401SFX.wav");
   sfx402 = loadSound("assets/sounds/sfx402.wav");
   sfx403 = loadSound("assets/sounds/sfx403.wav");
+
 
   punchsfx1 = loadSound("assets/sounds/punchsfx1.wav");
   punchsfx2 = loadSound("assets/sounds/punchsfx2.wav");
@@ -125,6 +155,19 @@ function preload() {
   punchsfx4 = loadSound("assets/sounds/punchsfx4.wav");
   punchsfx5 = loadSound("assets/sounds/punchsfx5.wav");
   lessonSfx = loadSound("assets/sounds/lessonSfx.wav");
+
+
+  introSequenceAudio = loadSound("assets/sounds/IntroSequenceAudio.wav");
+
+
+  endS1Audio = loadSound("assets/sounds/EndS1Audio.wav");
+  endS2Audio = loadSound("assets/sounds/EndS2Audio.wav");
+  endS3Audio = loadSound("assets/sounds/EndS3Audio.wav");
+
+  backgroundAudio = loadSound("assets/sounds/EpicMusic.mp3");
+
+
+
 
 }
 
@@ -144,16 +187,25 @@ function setup() {
 
   //Lisent for predictions
   handpose.on('predict', function(results) {
-    console.log(results);
+    // console.log(results);
     predictions = results;
   });
+
+  //Intro TargetIcon
+
+  introTarget = {
+    x: 555,
+    y: 410,
+    size: 72,
+    collected: true
+  };
 
   // The target101 definition
   target101 = {
     x: 384,
     y: 150,
     size: 72,
-    collected: false
+    collected: true
   };
 
   target102 = {
@@ -244,8 +296,67 @@ function setup() {
     collected: true
   };
 
+  // Important pivot with the set timer
   target401 = {
-    collected: false
+    collected: true // If you want to be in state 3, need to be false
+  };
+
+  target501 = {
+    x: 380,
+    y: 190,
+    size: 72,
+    collected: true
+  };
+
+  target502 = {
+    x: 496,
+    y: 352,
+    size: 72,
+    collected: true
+  };
+
+  target503 = {
+    x: 407,
+    y: 249,
+    size: 72,
+    collected: true
+  };
+
+  target504 = {
+    x: 450,
+    y: 140,
+    size: 72,
+    collected: true
+  };
+
+  // To put in
+
+  target601 = {
+    x: 380,
+    y: 163,
+    size: 72,
+    collected: true
+  };
+
+  target701 = {
+    x: 323,
+    y: 221,
+    size: 72,
+    collected: true
+  };
+
+  target702 = {
+    x: 351,
+    y: 145,
+    size: 72,
+    collected: true
+  };
+
+  target703 = {
+    x: 361,
+    y: 69,
+    size: 72,
+    collected: true
   };
 
 
@@ -253,7 +364,94 @@ function setup() {
 
 
 function state1() {
-  image(introImage, 0, 0);
+  background(introImage)
+
+  //Press a key to start the simulation [PROBLEM]
+
+  // keyPressed()
+
+}
+
+//For the intro
+function keyPressed() {
+  if (state === 'state1') {
+    state = 'introScene'
+    introSequenceAudio.play()
+
+    setTimeout(switchToInstructions, 8000)
+  }
+}
+
+function introScene() {
+  background(introSequence)
+
+  //setTimeout with video
+  // setTimeout(switchToInstructions, 8000)
+}
+
+function switchToInstructions() {
+
+  introTarget.collected = false;
+
+  state = 'instructionScene'
+
+  if (!backgroundAudio.isPlaying()) {
+    backgroundAudio.loop();
+    backgroundAudio.setVolume(0.2);
+  }
+
+
+
+}
+
+function instructionScene() {
+
+  if (introTarget.collected === false) {
+    background(instructions);
+    push();
+    fill(0, 255, 0);
+    noStroke();
+    imageMode(CENTER)
+    image(targetImage, introTarget.x, introTarget.y)
+    pop();
+  }
+
+
+  if (predictions.length > 0) {
+    let hand = predictions[0];
+    let index = hand.annotations.indexFinger;
+    let tip = index[3];
+    let base = index[0];
+    let tipX = tip[0];
+    let tipY = tip[1];
+    let baseX = base[0];
+    let baseY = base[1];
+
+    push();
+    noFill();
+    stroke(255, 255, 255);
+    strokeWeight(2);
+    line(baseX, baseY, tipX, tipY);
+    pop();
+
+    push();
+    noStroke();
+    fill(255, 0, 0);
+    ellipse(baseX, baseY, 20)
+    pop();
+
+    //check if target101 Pop
+
+    let d1 = dist(tipX, tipY, introTarget.x, introTarget.y);
+    if (introTarget.collected === false && d1 < introTarget.size / 2) {
+      introTarget.collected = true;
+      target101.collected = false;
+      state = 'state2'
+
+      punchsfx1.play();
+
+    }
+  }
 }
 
 
@@ -275,6 +473,12 @@ function statemachine() {
   if (state === `state1`) {
     state1()
 
+  } else if (state === `introScene`) {
+    introScene()
+
+  } else if (state === `instructionScene`) {
+    instructionScene()
+
   } else if (state === `state2`) {
     state2()
 
@@ -288,8 +492,28 @@ function statemachine() {
   } else if (state === 'state5') {
     sequence6()
 
-  }
+  } else if (state === 'state6') {
+    sequence7()
 
+  } else if (state === 'state7') {
+    displayEndSequence1()
+
+  } else if (state === 'state8') {
+    sequence8()
+
+  } else if (state === 'state9') {
+    displayEndSequence2()
+
+  } else if (state === 'state10') {
+    sequence9()
+
+  } else if (state === 'state11') {
+    displayEndSequence3()
+
+  } else if (state === 'state12') {
+    finalScreen()
+
+  }
 
 }
 
@@ -398,7 +622,7 @@ function sequence2() {
     fill(0, 255, 0);
     noStroke();
     imageMode(CENTER)
-    image(targetImage,target202.x, target202.y);
+    image(targetImage, target202.x, target202.y);
     pop();
   }
 
@@ -618,11 +842,11 @@ function sequence3() {
       target307.collected = true;
       target401.collected = false;
 
-
       sfx401.play();
 
       state = 'state3'
 
+      setTimeout(switchToSequence5, 162)
 
     }
   }
@@ -633,8 +857,8 @@ function sequence4() {
 
   if (target401.collected === false) {
     background(fight401);
-    setTimeout(switchToSequence5, 162)
-    //
+
+
 
   }
 }
@@ -642,21 +866,342 @@ function sequence4() {
 function switchToSequence5() {
   state = 'state4'
   sfx402.play();
+  setTimeout(switchToSequence6, 140)
 }
 
 function sequence5() {
   background(fight402);
-  setTimeout(switchToSequence6, 140)
+
 }
 
 function switchToSequence6() {
   state = 'state5'
-  sfx403.play();
+  sfx403.play(); // Doesn't sound good
+  setTimeout(switchToSequence7, 2000)
 }
 
 function sequence6() {
   background(fight403);
-  // setTimeout(switchToSequence6, 2000)
+
 }
 
-// 00:00:00:14
+function switchToSequence7() {
+  state = 'state6'
+
+  target501.collected = false;
+
+  // punchsfx2.play(); // Doesn't sound good
+}
+
+function sequence7() {
+
+  if (target501.collected === false) {
+    background(fight501);
+    push();
+    fill(0, 255, 0);
+    noStroke();
+    imageMode(CENTER)
+    image(targetImage, target501.x, target501.y);
+    pop();
+  }
+
+  if (target502.collected === false) {
+    background(fight502);
+    push();
+    fill(0, 255, 0);
+    noStroke();
+    imageMode(CENTER)
+    image(targetImage, target502.x, target502.y);
+    pop();
+  }
+
+  if (target503.collected === false) {
+    background(fight503);
+    push();
+    fill(0, 255, 0);
+    noStroke();
+    imageMode(CENTER)
+    image(targetImage, target503.x, target503.y);
+    pop();
+  }
+
+  if (target504.collected === false) {
+    background(fight504);
+    push();
+    fill(0, 255, 0);
+    noStroke();
+    imageMode(CENTER)
+    image(targetImage, target504.x, target504.y);
+    pop();
+  }
+
+
+  if (predictions.length > 0) {
+    let hand = predictions[0];
+    let index = hand.annotations.indexFinger;
+    let tip = index[3];
+    let base = index[0];
+    let tipX = tip[0];
+    let tipY = tip[1];
+    let baseX = base[0];
+    let baseY = base[1];
+
+    push();
+    noFill();
+    stroke(255, 255, 255);
+    strokeWeight(2);
+    line(baseX, baseY, tipX, tipY);
+    pop();
+
+    push();
+    noStroke();
+    fill(255, 0, 0);
+    ellipse(baseX, baseY, 20)
+    pop();
+
+
+    //check if target500s Pop
+
+    let d1 = dist(tipX, tipY, target501.x, target501.y);
+    if (target501.collected === false && d1 < target501.size / 2) {
+      target501.collected = true;
+      target502.collected = false;
+
+      punchsfx1.play();
+
+    }
+
+    let d2 = dist(tipX, tipY, target502.x, target502.y);
+    if (target502.collected === false && d2 < target502.size / 2) {
+      target502.collected = true;
+      target503.collected = false;
+
+      punchsfx1.play();
+
+    }
+
+    let d3 = dist(tipX, tipY, target503.x, target503.y);
+    if (target503.collected === false && d3 < target503.size / 2) {
+      target503.collected = true;
+      target504.collected = false;
+
+      punchsfx1.play();
+
+    }
+
+    let d4 = dist(tipX, tipY, target504.x, target504.y);
+    if (target504.collected === false && d4 < target504.size / 2) {
+      target504.collected = true;
+      // target505.collected = false;
+
+      punchsfx2.play();
+
+      state = 'state7'
+
+      backgroundAudio.setVolume(0.01);
+
+      endS1Audio.play();
+
+      setTimeout(switchToEndSequence1, 10160)
+
+    }
+
+  }
+}
+
+function displayEndSequence1() {
+  background(endSequence1)
+
+}
+
+function switchToEndSequence1() {
+  state = 'state8'
+
+  backgroundAudio.setVolume(0.2);
+
+  target601.collected = false;
+
+}
+
+function sequence8() {
+
+  if (target601.collected === false) {
+    background(fight601);
+    push();
+    fill(0, 255, 0);
+    noStroke();
+    imageMode(CENTER)
+    image(targetImage, target601.x, target601.y);
+    pop();
+  }
+
+  if (predictions.length > 0) {
+    let hand = predictions[0];
+    let index = hand.annotations.indexFinger;
+    let tip = index[3];
+    let base = index[0];
+    let tipX = tip[0];
+    let tipY = tip[1];
+    let baseX = base[0];
+    let baseY = base[1];
+
+    push();
+    noFill();
+    stroke(255, 255, 255);
+    strokeWeight(2);
+    line(baseX, baseY, tipX, tipY);
+    pop();
+
+    push();
+    noStroke();
+    fill(255, 0, 0);
+    ellipse(baseX, baseY, 20)
+    pop();
+
+
+    //check if target500s Pop
+
+    let d1 = dist(tipX, tipY, target601.x, target601.y);
+    if (target601.collected === false && d1 < target601.size / 2) {
+      target601.collected = true;
+
+      punchsfx1.play();
+
+      state = 'state9'
+
+      backgroundAudio.setVolume(0.01);
+
+      endS2Audio.play();
+
+      setTimeout(switchToEndSequence2, 15190)
+
+
+    }
+  }
+}
+
+function displayEndSequence2() {
+  background(endSequence2)
+
+}
+
+function switchToEndSequence2() {
+  state = 'state10'
+
+  backgroundAudio.setVolume(0.2);
+
+  target701.collected = false;
+
+}
+
+function sequence9() {
+
+  if (target701.collected === false) {
+    background(fight701);
+    push();
+    fill(0, 255, 0);
+    noStroke();
+    imageMode(CENTER)
+    image(targetImage, target701.x, target701.y);
+    pop();
+  }
+
+  if (target702.collected === false) {
+    background(fight702);
+    push();
+    fill(0, 255, 0);
+    noStroke();
+    imageMode(CENTER)
+    image(targetImage, target702.x, target702.y);
+    pop();
+  }
+
+  if (target703.collected === false) {
+    background(fight703);
+    push();
+    fill(0, 255, 0);
+    noStroke();
+    imageMode(CENTER)
+    image(targetImage, target703.x, target703.y);
+    pop();
+  }
+
+  if (predictions.length > 0) {
+    let hand = predictions[0];
+    let index = hand.annotations.indexFinger;
+    let tip = index[3];
+    let base = index[0];
+    let tipX = tip[0];
+    let tipY = tip[1];
+    let baseX = base[0];
+    let baseY = base[1];
+
+    push();
+    noFill();
+    stroke(255, 255, 255);
+    strokeWeight(2);
+    line(baseX, baseY, tipX, tipY);
+    pop();
+
+    push();
+    noStroke();
+    fill(255, 0, 0);
+    ellipse(baseX, baseY, 20)
+    pop();
+
+
+    //check if target500s Pop
+
+    let d1 = dist(tipX, tipY, target701.x, target701.y);
+    if (target701.collected === false && d1 < target701.size / 2) {
+      target701.collected = true;
+      target702.collected = false;
+
+      punchsfx1.play();
+
+    }
+
+    let d2 = dist(tipX, tipY, target702.x, target702.y);
+    if (target702.collected === false && d2 < target702.size / 2) {
+      target702.collected = true;
+      target703.collected = false;
+
+      punchsfx1.play();
+
+    }
+
+    let d3 = dist(tipX, tipY, target703.x, target703.y);
+    if (target703.collected === false && d3 < target703.size / 2) {
+      target703.collected = true;
+
+      punchsfx2.play();
+
+      state = 'state11'
+
+      backgroundAudio.setVolume(0.01);
+
+      endS3Audio.play();
+
+      setTimeout(goToFinalScreen, 12060)
+
+    }
+
+  }
+}
+
+function displayEndSequence3() {
+  background(endSequence3)
+
+}
+
+function goToFinalScreen() {
+  state = 'state12'
+
+  backgroundAudio.setVolume(0.2);
+
+
+}
+
+function finalScreen() {
+  background(0)
+}
