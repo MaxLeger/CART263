@@ -9,7 +9,7 @@ MAIN JS CODE:
 
 "use strict";
 
-var audioElement = new Audio("assets/sounds/enemy.mp3");
+var audioElement = new Audio("assets/sounds/enemy.mp3"); //Prepares the audio
 
 const HALF_SECOND = 500; // Assigns 500 milliseconds to HALF_SECOND constant.
 const ENEMY = `enemy`; // Assigns Enemy to Enemy constant.
@@ -39,7 +39,7 @@ $(`#answer`).droppable({
 
     if ($(this).text() === ENEMY) { // If the text within #answer is equal to the answer of "Enemy", then...
       $(`#solved-dialog`).dialog(`open`); // Opens the dialog box upon droping the last letter.
-      audioElement.play();
+      audioElement.play(); //Plays the audio
     }
   }
 });
