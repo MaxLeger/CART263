@@ -9,15 +9,18 @@ MAIN JS CODE:
 
 "use strict";
 
+var audioElement = new Audio("assets/sounds/enemy.mp3");
+
 const HALF_SECOND = 500; // Assigns 500 milliseconds to HALF_SECOND constant.
-const THEREMIN = `Theremin`; // Assigns Theremin to THEREMIN constant.
+const ENEMY = `enemy`; // Assigns Enemy to Enemy constant.
 
 
 $(`#solved-dialog`).dialog({ // Method that creates a dialog box.
   autoOpen: false, // Prevents the dialog box from opening upon initialization.
   buttons: { // Button option that allows the user to click an option.
-    "I know.": function() { // Displayed text in modal.
+    "Spare the sympathy": function() { // Displayed text in modal.
       $(this).dialog(`close`); // Closes the dialog box upon the user clicking the "I know." button.
+
     }
   }
 });
@@ -34,8 +37,9 @@ $(`#answer`).droppable({
     ui.draggable.draggable(`disable`); // Prevents the original letter from being draggable once droped in answer id.
     ui.draggable.removeClass(`found`); // Letter returns to black as found class is removed once letter has been dragged and dropped.
 
-    if ($(this).text() === THEREMIN) { // If the text within #answer is equal to the answer of "Theremin", then...
+    if ($(this).text() === ENEMY) { // If the text within #answer is equal to the answer of "Enemy", then...
       $(`#solved-dialog`).dialog(`open`); // Opens the dialog box upon droping the last letter.
+      audioElement.play();
     }
   }
 });

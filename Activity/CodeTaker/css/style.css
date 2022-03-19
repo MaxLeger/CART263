@@ -1,8 +1,14 @@
 #poem {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
+  font-family: Copperplate, Papyrus, fantasy;
+  color: white;
 }
 
 #answer {
+  color: blue;
+  font-family: Copperplate, Papyrus, fantasy;
+  font-size: 1.44rem;
+  padding-left: 50px;
   width: 10rem;
   height: 2rem;
   border: 1px dashed black;
