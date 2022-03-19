@@ -1,0 +1,14 @@
+.heading {
+  font-family: arial, helvetica, serif;
+  color: #887e8d;
+  font-size: 1.71em;
+  text-align: center;
+  opacity: 0;
+}
+
+.big-heading {
+  font-family: arial, helvetica, serif;
+  color: #887e8d;
+  font-size: 2.7em;
+  text-align: center;
+}
