@@ -12,7 +12,7 @@ class Icon {
   }
 
   show() {
-
+    //Displays the elements as their repective images
     push();
     noStroke();
     fill(255, 0, 0, this.opacity);
@@ -44,6 +44,7 @@ class Icon {
         score += 1;
       }
     }
+    // Makes the object collected
     this.collected = true
   }
 

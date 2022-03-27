@@ -18,6 +18,8 @@ let score = 0;
 
 let icon1
 
+// Icon1 was tranfered to an object-oriented programming set-up
+
 // let icon1 = {
 //   x: 100,
 //   y: 200,
@@ -38,10 +40,12 @@ let icon2 = {
   collected: false
 }
 
+// point of reference for the mouse location
 let mouseEllipse = {
   size: 20
 }
 
+//Preloads the assets
 
 function preload() {
   music = loadSound("assets/sounds/GorillazFeelGoodInc.mp3");
@@ -53,20 +57,22 @@ function preload() {
 function setup() {
   createCanvas(960, 600);
 
+  // Activates a function on a chosen timeframe of the music piece
+
   music.addCue(5.39, fadeIn1);
   music.addCue(6.14, fadeIn2);
 
-
+  // Icon1 as an object-oriented
   icon1 = new Icon(320, 300)
 
 }
 
+// Indication of the state
 function statemachine() {
   if (state === `title`) {
     title();
   } else if (state === `game`) {
     game();
-
 
     // ** Stops displaying when specifying if icon is collected **
 
@@ -88,17 +94,19 @@ function title() {
   image(gamestart, 480, 300);
 }
 
+// Game state function
 function game() {
 
-
+  // Rules for the fade in and the the fade out of the icon
   icon1.opacity += icon1.fadeSpeed * icon1.fadeDirection;
   if (icon1.fadeDirection === 1 && icon1.opacity >= 255) {
-    icon1.fadeDirection = -1;
-    icon1.fadeSpeed = 5
+    icon1.fadeDirection = -1; //Change of direction
+    icon1.fadeSpeed = 5 // Slower fade out
   } else if (icon1.fadeDirection === -1 && icon1.opacity <= 0) {
     icon1.fadeDirection = 0;
   }
 
+  //Displays the icon
   if (icon2.collected === false) {
     push();
     noStroke();
@@ -115,6 +123,7 @@ function game() {
     icon2.fadeDirection = 0;
   }
 
+  // Displays the current score
   text(score, 0, height);
 
 }
@@ -140,6 +149,7 @@ function mousePressed() {
   }
 }
 
+// function which displays a reference for the mouse location
 function displayMouseEllipse() {
   push();
   noStroke();
@@ -149,9 +159,10 @@ function displayMouseEllipse() {
 }
 //Fade section
 
+// Cue activation function
 function fadeIn1() {
-  icon1.fadeDirection = 1;
-  icon1.active = true
+  icon1.fadeDirection = 1; // Makes the icon fade in
+  icon1.active = true // Makes the icon active
 }
 
 function fadeIn2() {
@@ -162,12 +173,14 @@ function fadeIn2() {
 function checkOverlap2() {
   let d = dist(icon2.x, icon2.y, mouseX, mouseY);
   if (icon2.collected === false && icon2.fadeDirection === -1 && d < icon2.size / 2 + mouseEllipse.size / 2) {
+    //Current integration of a point system:
     if (icon2.opacity > 180) {
      score += 5;
    }
   else if (icon2.opacity > 90) {
     score += 1;
   }
+  // Removes the icon
     icon2.collected = true;
   }
 }
