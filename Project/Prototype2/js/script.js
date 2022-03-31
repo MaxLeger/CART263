@@ -30,15 +30,15 @@ let icon1
 //   collected: false
 // }
 
-let icon2 = {
-  x: 640,
-  y: 300,
-  size: 90,
-  opacity: 0,
-  fadeDirection: 0,
-  fadeSpeed: 18,
-  collected: false
-}
+// let icon2 = {
+//   x: 640,
+//   y: 300,
+//   size: 90,
+//   opacity: 0,
+//   fadeDirection: 0,
+//   fadeSpeed: 18,
+//   collected: false
+// }
 
 // point of reference for the mouse location
 let mouseEllipse = {
@@ -59,11 +59,50 @@ function setup() {
 
   // Activates a function on a chosen timeframe of the music piece
 
-  music.addCue(5.39, fadeIn1);
-  music.addCue(6.14, fadeIn2);
+  music.addCue(5.21  , function() {
+    icon1.fadeDirection = 1;
+  });
+  music.addCue(5.8, function() {
+    icon2.fadeDirection = 1;
+  });
+  music.addCue(6.16, function() {
+    icon3.fadeDirection = 1;
+  });
+  music.addCue(7.04, function() {
+    icon4.fadeDirection = 1;
+  });
+  music.addCue(7.12, function() {
+    icon5.fadeDirection = 1;
+  });
+  music.addCue(7.20, function() {
+    icon6.fadeDirection = 1;
+  });
+  music.addCue(8.02, function() {
+    icon7.fadeDirection = 1;
+  });
+  music.addCue(8.20, function() {
+    icon8.fadeDirection = 1;
+  });
+
 
   // Icon1 as an object-oriented
-  icon1 = new Icon(320, 300)
+
+  // template = iconX = new Icon(x, y)
+  icon1 = new Icon(90, 81)
+
+  icon2 = new Icon(288, 81)
+
+  icon3 = new Icon(337, 135)
+
+  icon4 = new Icon(390, 195)
+
+  icon5 = new Icon(433, 234)
+
+  icon6 = new Icon(480, 271)
+
+  icon7 = new Icon(520, 213)
+
+  icon8 = new Icon(556, 161)
 
 }
 
@@ -74,18 +113,8 @@ function statemachine() {
   } else if (state === `game`) {
     game();
 
-    // ** Stops displaying when specifying if icon is collected **
-
-    // if (icon1.collected === false && icon1.active === true)
-
-    if (icon1.active === true) {
-
-      icon1.show();
-    }
-
     displayMouseEllipse();
 
-    checkOverlap2();
   }
 }
 
@@ -97,31 +126,21 @@ function title() {
 // Game state function
 function game() {
 
-  // Rules for the fade in and the the fade out of the icon
-  icon1.opacity += icon1.fadeSpeed * icon1.fadeDirection;
-  if (icon1.fadeDirection === 1 && icon1.opacity >= 255) {
-    icon1.fadeDirection = -1; //Change of direction
-    icon1.fadeSpeed = 5 // Slower fade out
-  } else if (icon1.fadeDirection === -1 && icon1.opacity <= 0) {
-    icon1.fadeDirection = 0;
-  }
+  icon1.update()
 
-  //Displays the icon
-  if (icon2.collected === false) {
-    push();
-    noStroke();
-    fill(255, 0, 0, icon2.opacity);
-    ellipse(icon2.x, icon2.y, icon2.size);
-    pop();
-  }
+  icon2.update()
 
-  icon2.opacity += icon2.fadeSpeed * icon2.fadeDirection;
-  if (icon2.fadeDirection === 1 && icon2.opacity >= 255) {
-    icon2.fadeDirection = -1;
-    icon2.fadeSpeed = 4;
-  } else if (icon2.fadeDirection === -1 && icon2.opacity <= 0) {
-    icon2.fadeDirection = 0;
-  }
+  icon3.update()
+
+  icon4.update()
+
+  icon5.update()
+
+  icon6.update()
+
+  icon7.update()
+
+  icon8.update()
 
   // Displays the current score
   text(score, 0, height);
@@ -146,6 +165,26 @@ function mousePressed() {
 
   if (state === "game") {
     icon1.mousePressed();
+    icon2.mousePressed();
+    icon3.mousePressed();
+    icon4.mousePressed();
+    icon5.mousePressed();
+    icon6.mousePressed();
+    icon7.mousePressed();
+    icon8.mousePressed();
+  }
+}
+
+function keyPressed() {
+  if (state === "game") {
+    icon1.keyPressed();
+    icon2.keyPressed();
+    icon3.keyPressed();
+    icon4.keyPressed();
+    icon5.keyPressed();
+    icon6.keyPressed();
+    icon7.keyPressed();
+    icon8.keyPressed();
   }
 }
 
@@ -156,31 +195,4 @@ function displayMouseEllipse() {
   fill(0, 255, 0);
   ellipse(mouseX, mouseY, mouseEllipse.size);
   pop();
-}
-//Fade section
-
-// Cue activation function
-function fadeIn1() {
-  icon1.fadeDirection = 1; // Makes the icon fade in
-  icon1.active = true // Makes the icon active
-}
-
-function fadeIn2() {
-  icon2.fadeDirection = 1;
-}
-
-//Check if the circles are overlapping
-function checkOverlap2() {
-  let d = dist(icon2.x, icon2.y, mouseX, mouseY);
-  if (icon2.collected === false && icon2.fadeDirection === -1 && d < icon2.size / 2 + mouseEllipse.size / 2) {
-    //Current integration of a point system:
-    if (icon2.opacity > 180) {
-     score += 5;
-   }
-  else if (icon2.opacity > 90) {
-    score += 1;
-  }
-  // Removes the icon
-    icon2.collected = true;
-  }
 }
