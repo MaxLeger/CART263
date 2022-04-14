@@ -18,27 +18,90 @@ let score = 0;
 
 let icon1
 
-// Icon1 was tranfered to an object-oriented programming set-up
+let tubeMusicData = [
+  {
+    cue: 8.20,
+    startX: 556,
+    startY: 171,
+    endX: 787,
+    endY: 171
+  }
+]
 
-// let icon1 = {
-//   x: 100,
-//   y: 200,
-//   size: 90,
-//   opacity: 0,
-//   fadeDirection: 0,
-//   fadeSpeed: 30,
-//   collected: false
-// }
 
-// let icon2 = {
-//   x: 640,
-//   y: 300,
-//   size: 90,
-//   opacity: 0,
-//   fadeDirection: 0,
-//   fadeSpeed: 18,
-//   collected: false
-// }
+let musicData = [
+  {
+    cue: 5.21,
+    x: 110,
+    y: 131
+  },
+  {
+    cue: 5.8,
+    x: 234,
+    y: 131
+  },
+  {
+    cue: 6.16,
+    x: 337,
+    y: 185
+  },
+  {
+    cue: 7.04,
+    x: 390,
+    y: 245
+  },
+  {
+    cue: 7.12,
+    x: 433,
+    y: 284
+  },
+  {
+    cue: 7.20,
+    x: 480,
+    y: 321
+  },
+  {
+    cue: 8.02,
+    x: 520,
+    y: 263
+  },
+  {
+    cue: 9.90 ,
+    x: 787,
+    y: 297
+  },
+  {
+    cue: 10.37 ,
+    x: 787,
+    y: 396
+
+  },
+  {
+    cue: 10.56 ,
+    x: 787,
+    y: 513
+  },
+  {
+    cue: 10.73,
+    x: 693,
+    y: 513
+  },
+  {
+    cue: 11.26 ,
+    x: 612,
+    y: 513
+  },
+  {
+    cue: 11.39,
+    x: 531,
+    y: 513
+  },
+
+];
+
+let icons = [];
+
+let tubes = [];
 
 // point of reference for the mouse location
 let mouseEllipse = {
@@ -57,52 +120,23 @@ function preload() {
 function setup() {
   createCanvas(960, 600);
 
-  // Activates a function on a chosen timeframe of the music piece
+  for (let i = 0; i < musicData.length; i++) {
+    let data = musicData[i];
+    let icon = new Icon(data.x, data.y);
+    music.addCue(data.cue, function () {
+      icon.fadeDirection = 1;
+    })
+    icons.push(icon);
+  }
 
-  music.addCue(5.21  , function() {
-    icon1.fadeDirection = 1;
-  });
-  music.addCue(5.8, function() {
-    icon2.fadeDirection = 1;
-  });
-  music.addCue(6.16, function() {
-    icon3.fadeDirection = 1;
-  });
-  music.addCue(7.04, function() {
-    icon4.fadeDirection = 1;
-  });
-  music.addCue(7.12, function() {
-    icon5.fadeDirection = 1;
-  });
-  music.addCue(7.20, function() {
-    icon6.fadeDirection = 1;
-  });
-  music.addCue(8.02, function() {
-    icon7.fadeDirection = 1;
-  });
-  music.addCue(8.20, function() {
-    icon8.fadeDirection = 1;
-  });
-
-
-  // Icon1 as an object-oriented
-
-  // template = iconX = new Icon(x, y)
-  icon1 = new Icon(90, 81)
-
-  icon2 = new Icon(288, 81)
-
-  icon3 = new Icon(337, 135)
-
-  icon4 = new Icon(390, 195)
-
-  icon5 = new Icon(433, 234)
-
-  icon6 = new Icon(480, 271)
-
-  icon7 = new Icon(520, 213)
-
-  icon8 = new Icon(556, 161)
+  for (let i = 0; i < tubeMusicData.length; i++) {
+    let data = tubeMusicData[i];
+    let tube = new Tube(data.startX, data.startY, data.endX, data.endY);
+    music.addCue(data.cue, function () {
+      tube.fadeDirection = 1;
+    })
+    tubes.push(tube);
+  }
 
 }
 
@@ -125,22 +159,15 @@ function title() {
 
 // Game state function
 function game() {
+  for (let i = 0; i < icons.length; i++) {
+    icons[i].update();
+  }
+  for (let i = 0; i < tubes.length; i++) {
+    tubes[i].update();
+  }
 
-  icon1.update()
 
-  icon2.update()
-
-  icon3.update()
-
-  icon4.update()
-
-  icon5.update()
-
-  icon6.update()
-
-  icon7.update()
-
-  icon8.update()
+  // icon1.update()
 
   // Displays the current score
   text(score, 0, height);
@@ -164,27 +191,31 @@ function mousePressed() {
   }
 
   if (state === "game") {
-    icon1.mousePressed();
-    icon2.mousePressed();
-    icon3.mousePressed();
-    icon4.mousePressed();
-    icon5.mousePressed();
-    icon6.mousePressed();
-    icon7.mousePressed();
-    icon8.mousePressed();
+    for (let i = 0; i < icons.length; i++) {
+      icons[i].mousePressed();
+    }
+    for (let i = 0; i < tubes.length; i++) {
+      tubes[i].mousePressed();
+    }
+    // icon1.mousePressed();
+
   }
 }
 
 function keyPressed() {
   if (state === "game") {
-    icon1.keyPressed();
-    icon2.keyPressed();
-    icon3.keyPressed();
-    icon4.keyPressed();
-    icon5.keyPressed();
-    icon6.keyPressed();
-    icon7.keyPressed();
-    icon8.keyPressed();
+    for (let i = 0; i < icons.length; i++) {
+      icons[i].keyPressed();
+    }
+
+  }
+}
+
+function mouseReleased() {
+  if (state === "game") {
+    for (let i = 0; i < tubes.length; i++) {
+      tubes[i].mouseReleased();
+    }
   }
 }
 

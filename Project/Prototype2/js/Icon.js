@@ -6,7 +6,7 @@ class Icon {
     this.size = 117;
     this.opacity = 0;
     this.fadeDirection = 0;
-    this.fadeSpeed = 30;
+    this.fadeSpeed = 99;
     this.active = true;
     this.collected = false;
     this.sizeSpeed = 0;
@@ -52,7 +52,7 @@ class Icon {
     if (this.fadeDirection === 1 && this.opacity >= 255) {
       this.fadeDirection = -1; //Change of directione
       this.fadeSpeed = 5 // Slower fade out
-      this.sizeSpeed = -1.44;
+      this.sizeSpeed = -1.17;
     } else if (this.fadeDirection === -1 && this.opacity <= 0) {
       this.fadeDirection = 0;
       this.sizeSpeed = 0;
@@ -66,9 +66,9 @@ class Icon {
 
     // Only respond to the mouse click if the shape is active
     // and the mouse is in the shape
-    if (this.active === true && this.collected === false && this.mouseIsOver()) {
+    if (this.active === true && this.opacity > 0 && this.collected === false && this.mouseIsOver()) {
         console.log("click")
-      if (this.opacity > 180) {
+      if (this.opacity > 144) {
         score += 5;
       } else if (this.opacity > 90) {
         score += 1;
@@ -84,7 +84,7 @@ class Icon {
 
     // Only respond to the mouse click if the shape is active
     // and the mouse is in the shape
-    if (this.active === true && this.collected === false && this.isKeyDown()  && this.mouseIsOver()) {
+    if (this.active === true && this.opacity > 0 && this.collected === false && this.isKeyDown()  && this.mouseIsOver()) {
         console.log("click")
       if (this.opacity > 180) {
         score += 5;
