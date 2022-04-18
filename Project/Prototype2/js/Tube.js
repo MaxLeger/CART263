@@ -19,7 +19,7 @@ class Tube {
       let newCircle = {
         x: lerp(this.startX, this.endX, i / this.numCircles),
         y: lerp(this.startY, this.endY, i / this.numCircles),
-        size: 81
+        size: 99
       }
       this.circles.push(newCircle);
     }
@@ -32,7 +32,7 @@ class Tube {
     this.size += this.sizeSpeed
     if (this.fadeDirection === 1 && this.opacity >= 255) {
       this.fadeDirection = -1; //Change of directione
-      this.fadeSpeed = 1 // Slower fade out
+      this.fadeSpeed = 1.71 // Slower fade out
       this.sizeSpeed = -1;
     } else if (this.fadeDirection === -1 && this.opacity <= 0) {
       this.fadeDirection = 0;
@@ -40,8 +40,31 @@ class Tube {
     }
   }
 
+  mouseIsOver() {
+    // Get the distance between the mouse and the shape
+    let d = dist(mouseX, mouseY, this.x, this.y);
+    // If it's smaller than the radius of the shape (circle)
+    // then the mouse is inside the shape! Otherwise not!
+    if (d < this.size / 2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isKeyDown() {
+    if(keyIsPressed){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   checkDragging() {
-    if (this.dragging) {
+    if (this.dragging || this.mouseIsOver() && this.isKeyDown()) {
+      console.log(this.mouseIsOver());
+      console.log(this.isKeyDown());
+
 
       for (let i = 0; i < this.circles.length; i++) {
         let c = this.circles[i];
@@ -74,6 +97,16 @@ class Tube {
   }
 
   mousePressed() {
+    let firstCircle = this.circles[0];
+    let d = dist(mouseX, mouseY, firstCircle.x, firstCircle.y);
+    if (d < firstCircle.size / 2) {
+      this.dragging = true;
+    } else {
+      this.dragging = false;
+    }
+  }
+
+  keyPressed() {
     let firstCircle = this.circles[0];
     let d = dist(mouseX, mouseY, firstCircle.x, firstCircle.y);
     if (d < firstCircle.size / 2) {
