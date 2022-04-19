@@ -322,7 +322,7 @@ let musicData = [
     size: 117
   },
   {
-    cue: 26,
+    cue: 26.1,
     x: 170,
     y: 232,
     size: 117
