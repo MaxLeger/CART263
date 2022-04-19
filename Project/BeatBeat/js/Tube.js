@@ -6,7 +6,7 @@ class Tube {
     this.endX = endX;
     this.endY = endY;
     this.following = false;
-    this.color = color(250, 0, 0);
+    // this.color = color(250, 0, 0);
     this.opacity = 0;
     this.fadeDirection = 0;
     this.fadeSpeed = 99;
@@ -63,6 +63,8 @@ class Tube {
     }
   }
 
+// How to make indicate tude = missed? To reset the the multiplier?
+
   checkDragging() {
     if (this.dragging || this.mouseIsOver() && this.isKeyDown()) {
       console.log(this.mouseIsOver());
@@ -74,6 +76,8 @@ class Tube {
         let d = dist(mouseX, mouseY, c.x, c.y);
         if (d < c.size / 2) {
           if (i === this.circles.length - 1) {
+            // scorePerTube += 10;
+            // currentMultiplier += 1;
             score += 10;
             this.dragging = false;
             this.fadeSpeed = 99

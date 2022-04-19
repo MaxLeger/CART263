@@ -14,9 +14,25 @@ let gamestart
 
 let music
 
+
+// let scorePerIcon = 0;
+// let scorePerTube = 0;
+
+// let score = (scorePerIcon + scorePerTube) * currentMultiplier;
+
 let score = 0;
 
-let icon1
+// let currentMultiplier = 1;
+
+//Multiplier threshold :
+// X2 = 1 collected
+// X3 = 4 collected
+// X4 = 8 collected
+// X5 = 16 collected
+// X6 = 32 collected
+// X7 = 64 collected
+// X8 = 128 collected
+// X9 = 256 collected
 
 let tubeMusicData = [
   {
@@ -1520,20 +1536,6 @@ function game() {
 
 }
 
-function game2() {
-  for (let i = 0; i < icons.length; i++) {
-    icons[i].update();
-  }
-  for (let i = 0; i < tubes.length; i++) {
-    tubes[i].update();
-  }
-
-
-
-  // Displays the current score
-  text(score, 0, height);
-
-}
 
 function draw() {
   background(220);

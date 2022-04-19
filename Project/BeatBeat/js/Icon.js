@@ -64,18 +64,34 @@ class Icon {
   mousePressed() {
 
 
+
+    // to make an icon = active if opacity > 0
+
+
+    // How to make Icon = missed?
+
+
     // Only respond to the mouse click if the shape is active
     // and the mouse is in the shape
     if (this.active === true && this.opacity > 0 && this.collected === false && this.mouseIsOver()) {
         console.log("click")
       if (this.opacity > 144) {
         score += 5;
+
+
+        // scorePerIcon += 5;
+
+        // Multiplier +
+
+
       } else if (this.opacity > 90) {
         score += 1;
+        // scorePerIcon += 1;
       }
       this.collected = true
     }
     // Makes the object collected
+    // If Icon = missed -> reset multiplier
 
   }
 
@@ -88,8 +104,10 @@ class Icon {
         console.log("click")
       if (this.opacity > 180) {
         score += 5;
+        // scorePerIcon += 5;
       } else if (this.opacity > 90) {
         score += 1;
+        // scorePerIcon += 1;
       }
       this.collected = true
     }
