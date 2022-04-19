@@ -1532,7 +1532,10 @@ function game() {
 
 
   // Displays the current score
-  text(score, 0, height);
+  text('SCORE:', 10, 590);
+  textSize(22.5);
+  text(score, 120, 590);
+  textSize(22.5);
 
 }
 
