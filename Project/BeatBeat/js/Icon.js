@@ -69,6 +69,11 @@ class Icon {
 
 
     // How to make Icon = missed?
+    // I have this way potentianaly:
+
+    // if (this.active === true && this opacity = 1 && this.fadeDirection = -1) {
+    //   icon.missed = true
+    // }
 
 
     // Only respond to the mouse click if the shape is active
