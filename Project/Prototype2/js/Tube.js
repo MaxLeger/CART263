@@ -6,6 +6,7 @@ class Tube {
     this.endX = endX;
     this.endY = endY;
     this.following = false;
+    this.color = color(250, 0, 0);
     this.opacity = 0;
     this.fadeDirection = 0;
     this.fadeSpeed = 99;
@@ -24,6 +25,8 @@ class Tube {
       this.circles.push(newCircle);
     }
   }
+
+
 
   update() {
     this.checkDragging();
@@ -101,6 +104,7 @@ class Tube {
     let d = dist(mouseX, mouseY, firstCircle.x, firstCircle.y);
     if (d < firstCircle.size / 2) {
       this.dragging = true;
+      // this.color = color(170, 0, 255);
     } else {
       this.dragging = false;
     }

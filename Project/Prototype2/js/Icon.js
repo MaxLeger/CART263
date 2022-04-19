@@ -1,9 +1,9 @@
 class Icon {
 
-  constructor(x, y) {
+  constructor(x, y, size) {
     this.x = x;
     this.y = y;
-    this.size = 117;
+    this.size = size;
     this.opacity = 0;
     this.fadeDirection = 0;
     this.fadeSpeed = 99;
