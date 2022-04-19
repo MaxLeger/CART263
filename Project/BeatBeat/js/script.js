@@ -1,10 +1,8 @@
 /***********************************************
-Project 1: CYBORG MONKEY
+FINAL Project: BEAT-BEAT
 MGL
 
-This monkey is running out of battery.
-Quick!
-Help him charge up by collecting energy bolts.
+
 ************************************************/
 
 let state = 'title'
