@@ -185,6 +185,8 @@ let musicData = [
     y: 245,
     size: 117
   },
+
+
   {
     cue: 7.12,
     x: 433,
@@ -1539,6 +1541,7 @@ function game() {
 
 
   // Displays the current score
+  // fill(255, 255, 255);
   text('Multiplier:  x', 10, 565);
   textSize(22.5);
   text(currentMultiplier, 135, 565);

@@ -32,12 +32,13 @@ class Tube {
 
   update() {
     this.checkDragging();
-    this.display();
+    // this.display2();
+    this.display1();
     this.opacity += this.fadeSpeed * this.fadeDirection;
     this.size += this.sizeSpeed
     if (this.fadeDirection === 1 && this.opacity >= 255) {
       this.fadeDirection = -1; //Change of directione
-      this.fadeSpeed = 1.71 // Slower fade out
+      this.fadeSpeed = 5 // Slower fade out
       this.sizeSpeed = -1;
     } else if (this.fadeDirection === -1 && this.opacity <= 0) {
       this.fadeDirection = 0;
@@ -104,16 +105,29 @@ class Tube {
 
   }
 
-  display() {
+  display1() {
     for (let i = 0; i < this.circles.length; i++) {
       let c = this.circles[i];
       push();
       noStroke();
-      fill(255, 0, 0, this.opacity);
+      fill(255, 255, 255, this.opacity);
       ellipse(c.x, c.y, c.size);
       pop();
     }
   }
+  //
+  // display2() {
+  //   for (let i = 0; i < this.circles.length; i++) {
+  //     let c = this.circles[i];
+  //     push();
+  //     drawingContext.shadowBlur = 18;
+  //     drawingContext.shadowColor = color(255, 0, 0);
+  //     noStroke();
+  //     fill(255, 0, 0, this.opacity);
+  //     ellipse(c.x, c.y, c.size);
+  //     pop();
+  //   }
+  // }
 
   mousePressed() {
     let firstCircle = this.circles[0];

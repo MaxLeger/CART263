@@ -18,9 +18,13 @@ class Icon {
     //Displays the elements as their repective images
     if (this.collected === false){
     push();
+
+    drawingContext.shadowBlur = 11.7;
+    drawingContext.shadowColor = color(255, 0, 0);
     strokeWeight(5.4);
-    stroke(255, 0, 0, this.opacity);
-    fill(220, this.opacity);
+    stroke(255, 255, 255, this.opacity);
+    noFill();
+    // fill(220, this.opacity);
     ellipse(this.x, this.y, this.size);
     pop();
 
@@ -100,6 +104,8 @@ class Icon {
         score += 5 * currentMultiplier;
 
         success += 1;
+
+        // displayScore1();
 
 
       } else if (this.opacity > 90) {
