@@ -23,7 +23,9 @@ let music
 
 let score = 0;
 
-// let currentMultiplier = 1;
+let success = 0;
+
+let currentMultiplier = 1;
 
 //Multiplier threshold :
 // X2 = 1 collected
@@ -1511,6 +1513,7 @@ function statemachine() {
     title();
   } else if (state === `game`) {
     game();
+    multiplierActivation();
 
     // displayIconPoints()
     // displayTubePoints()
@@ -1536,9 +1539,17 @@ function game() {
 
 
   // Displays the current score
+  text('Multiplier:  x', 10, 565);
+  textSize(22.5);
+  text(currentMultiplier, 135, 565);
+  textSize(22.5);
+
+
+
+  // Displays the current score
   text('SCORE:', 10, 590);
   textSize(22.5);
-  text(score, 120, 590);
+  text(score, 117, 590);
   textSize(22.5);
 
 }
@@ -1597,6 +1608,6 @@ function mouseReleased() {
   pop();
 }
 
-// function displayIconPoints() {
-//
-// }
+function multiplierActivation() {
+  currentMultiplier = 1 + success;
+}

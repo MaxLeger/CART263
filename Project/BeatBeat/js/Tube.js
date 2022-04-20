@@ -14,7 +14,7 @@ class Tube {
     this.collected = false;
     this.sizeSpeed = 0;
 
-    this.missed = false;
+    // this.missed = false;
 
     this.numCircles = 20;
     this.circles = [];
@@ -42,6 +42,11 @@ class Tube {
     } else if (this.fadeDirection === -1 && this.opacity <= 0) {
       this.fadeDirection = 0;
       this.sizeSpeed = 0;
+
+      if (!this.collected) {
+        currentMultiplier = 1;
+        success = 0;
+      }
     }
   }
 
@@ -82,9 +87,12 @@ class Tube {
           if (i === this.circles.length - 1) {
             // scorePerTube += 10;
             // currentMultiplier += 1;
-            score += 10;
+            score += 10 * currentMultiplier;
+
+            success += 1;
             this.dragging = false;
-            this.fadeSpeed = 99
+            this.fadeSpeed = 99;
+            this.collected = true;
           }
           return;
         }
@@ -132,16 +140,5 @@ class Tube {
     this.dragging = false;
   }
 
-  checkMissed() {
-    if (this.active === true && tube.missed === false && this.opacity === 5 && this.fadeDirection === -1) {
-      tube.missed = true
-      console.log("MISSED!")
-    }
-  }
-
-  missedTube() {
-    if (tube.missed === true)
-    score += -3;
-  }
 
 }

@@ -7,6 +7,8 @@ class Icon {
     this.opacity = 0;
     this.fadeDirection = 0;
     this.fadeSpeed = 99;
+
+
     this.active = true;
     this.collected = false;
     this.sizeSpeed = 0;
@@ -24,6 +26,15 @@ class Icon {
 
   }
 }
+
+
+  // displayScore1() {
+  //   if (this.collected === true) {
+  //     text(5 * currentMultiplier, mouseX+30, mouseY+30);
+  //     textSize(22.5);
+  //   }
+  // }
+
 
   mouseIsOver() {
     // Get the distance between the mouse and the shape
@@ -56,6 +67,11 @@ class Icon {
     } else if (this.fadeDirection === -1 && this.opacity <= 0) {
       this.fadeDirection = 0;
       this.sizeSpeed = 0;
+
+      if (!this.collected) {
+        currentMultiplier = 1;
+        success = 0;
+      }
     }
     this.show()
   }
@@ -81,16 +97,13 @@ class Icon {
     if (this.active === true && this.opacity > 0 && this.collected === false && this.mouseIsOver()) {
         console.log("click")
       if (this.opacity > 144) {
-        score += 5;
+        score += 5 * currentMultiplier;
 
-
-        // scorePerIcon += 5;
-
-        // Multiplier threshold +1
+        success += 1;
 
 
       } else if (this.opacity > 90) {
-        score += 1;
+        score += 1 * currentMultiplier;
         // scorePerIcon += 1;
       }
       this.collected = true
@@ -108,10 +121,11 @@ class Icon {
     if (this.active === true && this.opacity > 0 && this.collected === false && this.isKeyDown()  && this.mouseIsOver()) {
         console.log("click")
       if (this.opacity > 180) {
-        score += 5;
-        // scorePerIcon += 5;
+        score += 5 * currentMultiplier;
+
+        success += 1;
       } else if (this.opacity > 90) {
-        score += 1;
+        score += 1 * currentMultiplier;
         // scorePerIcon += 1;
       }
       this.collected = true
@@ -119,5 +133,6 @@ class Icon {
     // Makes the object collected
 
   }
+
 
 }
