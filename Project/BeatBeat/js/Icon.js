@@ -86,7 +86,7 @@ class Icon {
 
         // scorePerIcon += 5;
 
-        // Multiplier +
+        // Multiplier threshold +1
 
 
       } else if (this.opacity > 90) {

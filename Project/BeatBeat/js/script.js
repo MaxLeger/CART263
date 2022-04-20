@@ -16,7 +16,10 @@ let music
 // let scorePerIcon = 0;
 // let scorePerTube = 0;
 
-// let score = (scorePerIcon + scorePerTube) * currentMultiplier;
+// let iconScore = (scorePerIcon * currentMultiplier);
+// let tubeScore = (scorePerTube * currentMultiplier);
+
+// let score = (iconScore + tubeScore);
 
 let score = 0;
 
@@ -1509,6 +1512,9 @@ function statemachine() {
   } else if (state === `game`) {
     game();
 
+    displayIconPoints()
+    displayTubePoints()
+
     displayMouseEllipse();
   }
 }
@@ -1589,4 +1595,8 @@ function mouseReleased() {
   fill(0, 255, 0);
   ellipse(mouseX, mouseY, mouseEllipse.size);
   pop();
+}
+
+function displayIconPoints() {
+
 }
