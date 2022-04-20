@@ -1512,8 +1512,8 @@ function statemachine() {
   } else if (state === `game`) {
     game();
 
-    displayIconPoints()
-    displayTubePoints()
+    // displayIconPoints()
+    // displayTubePoints()
 
     displayMouseEllipse();
   }
@@ -1597,6 +1597,6 @@ function mouseReleased() {
   pop();
 }
 
-function displayIconPoints() {
-
-}
+// function displayIconPoints() {
+//
+// }

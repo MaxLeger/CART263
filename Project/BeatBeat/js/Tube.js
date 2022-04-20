@@ -14,6 +14,8 @@ class Tube {
     this.collected = false;
     this.sizeSpeed = 0;
 
+    this.missed = false;
+
     this.numCircles = 20;
     this.circles = [];
     for (let i = 0; i < this.numCircles; i++) {
@@ -65,9 +67,7 @@ class Tube {
 
 // How to make indicate tude = missed? To reset the the multiplier?
 
-// if (this.active === true && this opacity = 1 && this.fadeDirection = -1) {
-//   tube.missed = true
-// }
+
 
   checkDragging() {
     if (this.dragging || this.mouseIsOver() && this.isKeyDown()) {
@@ -130,6 +130,18 @@ class Tube {
 
   mouseReleased() {
     this.dragging = false;
+  }
+
+  checkMissed() {
+    if (this.active === true && tube.missed === false && this.opacity === 5 && this.fadeDirection === -1) {
+      tube.missed = true
+      console.log("MISSED!")
+    }
+  }
+
+  missedTube() {
+    if (tube.missed === true)
+    score += -3;
   }
 
 }
