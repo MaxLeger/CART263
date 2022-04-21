@@ -1491,7 +1491,7 @@ let mouseEllipse = {
 function preload() {
   music = loadSound("assets/sounds/GorillazFeelGoodInc.mp3");
 
-  gamestart = loadImage("assets/images/BackdropGrid_1.gif");
+  gamestart = loadImage("assets/images/BackdropGrid_3.gif");
 
   backdrop = loadImage("assets/images/TheDrop3.png");
 
@@ -1564,18 +1564,24 @@ function game() {
   // drawingContext.shadowBlur = 11.7;
   // drawingContext.shadowColor = color(0, 0, 0);
 
-  text('Multiplier:  x', 10, 565);
-  textSize(22.5);
-  text(currentMultiplier, 135, 565);
-  textSize(22.5);
+  // fill(254, 221, 17)
+  // stroke(240,165,4)
+  // strokeWeight(4.5)
+
+  fill(117)
+
+  text('Multiplier:  X', 38+1, 537);
+  textSize(32.4);
+  text(currentMultiplier, 226+1, 537);
+  textSize(32.4);
 
 
 
   // Displays the current score
-  text('SCORE:', 10, 590);
-  textSize(22.5);
-  text(score, 117, 590);
-  textSize(22.5);
+  text('SCORE:', 38+1, 575);
+  textSize(32.4);
+  text(score, 196+1, 575);
+  textSize(32.4);
 
 
 
@@ -1585,7 +1591,7 @@ function game() {
 function draw() {
 
   frameRate(15);
-  pixelDensity(0.495)
+  pixelDensity(0.477)
 
   background(211);
 

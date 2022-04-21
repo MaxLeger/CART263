@@ -172,19 +172,21 @@ class Tube {
     this.dragging = false;
   }
 
+  //255, 93, 44
+
   colorSwitch() {
     if (currentMultiplier >= 1 && currentMultiplier < 10){
-      this.color = color(0, 36, 255);
+      this.color = color(255, 114, 12);
     } if (currentMultiplier >= 10 && currentMultiplier < 20){
-      this.color = color(0, 255, 255);
+      this.color = color(233,15,169);
     } else if (currentMultiplier >= 20 && currentMultiplier < 40) {
-      this.color = color(127, 255, 212);
+      this.color = color(165, 119, 249);
     }  else if (currentMultiplier >= 40 && currentMultiplier < 60) {
-      this.color = color(49, 255, 127);
+      this.color = color(0, 255, 255);
     }  else if (currentMultiplier >= 60 && currentMultiplier < 80) {
       this.color = color(0, 255, 0);
-    }  else if (currentMultiplier >= 80 && currentMultiplier < 100) {
-      this.color = color(207, 18, 117);
+    } else if (currentMultiplier >= 80 && currentMultiplier < 100) {
+      this.color = color(192, 255, 0);
     }
 
   }

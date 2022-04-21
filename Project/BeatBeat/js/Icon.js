@@ -8,7 +8,7 @@ class Icon {
     this.fadeDirection = 0;
     this.fadeSpeed = 99;
 
-    this.color = color(0, 0, 255);
+    this.color = color(255, 206, 0);
 
 
     this.active = true;
@@ -114,7 +114,7 @@ class Icon {
 
       } else if (this.opacity > 90) {
         score += 1 * currentMultiplier;
-        // scorePerIcon += 1;
+
       }
       this.collected = true
     }
@@ -145,19 +145,20 @@ class Icon {
 
   }
 
-colorSwitch() {
-  if (currentMultiplier >= 1 && currentMultiplier < 10){
-    this.color = color(0, 36, 255);
-  } if (currentMultiplier >= 10 && currentMultiplier < 20){
-    this.color = color(0, 255, 255);
-  } else if (currentMultiplier >= 20 && currentMultiplier < 40) {
-    this.color = color(127, 255, 212);
-  }  else if (currentMultiplier >= 40 && currentMultiplier < 60) {
-    this.color = color(49, 255, 127);
-  }  else if (currentMultiplier >= 70 && currentMultiplier < 80) {
-    this.color = color(207, 18, 117);
+  colorSwitch() {
+    if (currentMultiplier >= 1 && currentMultiplier < 10){
+      this.color = color(255, 114, 12);
+    } if (currentMultiplier >= 10 && currentMultiplier < 20){
+      this.color = color(233,15,169);
+    } else if (currentMultiplier >= 20 && currentMultiplier < 40) {
+      this.color = color(165, 119, 249);
+    }  else if (currentMultiplier >= 40 && currentMultiplier < 60) {
+      this.color = color(0, 255, 255);
+    }  else if (currentMultiplier >= 60 && currentMultiplier < 80) {
+      this.color = color(0, 255, 0);
+    } else if (currentMultiplier >= 80 && currentMultiplier < 100) {
+      this.color = color(192, 255, 0);
+    }
+
   }
-
-}
-
 }
