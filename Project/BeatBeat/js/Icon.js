@@ -18,9 +18,10 @@ class Icon {
     //Displays the elements as their repective images
     if (this.collected === false){
     push();
+    frameRate(27)
 
     drawingContext.shadowBlur = 11.7;
-    drawingContext.shadowColor = color(255, 0, 0);
+    drawingContext.shadowColor = color(69, 0, 222);
     strokeWeight(5.4);
     stroke(255, 255, 255, this.opacity);
     noFill();

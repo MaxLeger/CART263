@@ -5,6 +5,8 @@ MGL
 
 ************************************************/
 
+p5.disableFriendlyErrors = true;
+
 let state = 'title'
 
 
@@ -1472,6 +1474,8 @@ let icons = [];
 
 let tubes = [];
 
+let backdrop;
+
 // point of reference for the mouse location
 let mouseEllipse = {
   size: 20
@@ -1483,6 +1487,8 @@ function preload() {
   music = loadSound("assets/sounds/GorillazFeelGoodInc.mp3");
 
   gamestart = loadImage("assets/images/gamestart.png");
+
+  backdrop = loadImage("assets/images/TheDrop1.png");
 
 }
 
@@ -1514,11 +1520,11 @@ function statemachine() {
   if (state === `title`) {
     title();
   } else if (state === `game`) {
+    displayBackdrop();
     game();
     multiplierActivation();
 
-    // displayIconPoints()
-    // displayTubePoints()
+
 
     displayMouseEllipse();
   }
@@ -1527,6 +1533,11 @@ function statemachine() {
 function title() {
   imageMode(CENTER);
   image(gamestart, 480, 300);
+}
+
+function displayBackdrop() {
+  imageMode(CENTER);
+  image(backdrop, 480, 300);
 }
 
 // Game state function
@@ -1559,7 +1570,13 @@ function game() {
 
 
 function draw() {
-  background(220);
+
+  frameRate(15);
+  pixelDensity(0.495)
+
+  background(211);
+
+
 
   statemachine();
 

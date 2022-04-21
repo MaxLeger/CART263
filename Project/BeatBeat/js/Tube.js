@@ -16,7 +16,7 @@ class Tube {
 
     // this.missed = false;
 
-    this.numCircles = 20;
+    this.numCircles = 18;
     this.circles = [];
     for (let i = 0; i < this.numCircles; i++) {
       let newCircle = {
@@ -32,13 +32,14 @@ class Tube {
 
   update() {
     this.checkDragging();
-    // this.display2();
+    this.display2();
     this.display1();
+    // this.display3();
     this.opacity += this.fadeSpeed * this.fadeDirection;
     this.size += this.sizeSpeed
     if (this.fadeDirection === 1 && this.opacity >= 255) {
       this.fadeDirection = -1; //Change of directione
-      this.fadeSpeed = 5 // Slower fade out
+      this.fadeSpeed = 5.4 // Slower fade out
       this.sizeSpeed = -1;
     } else if (this.fadeDirection === -1 && this.opacity <= 0) {
       this.fadeDirection = 0;
@@ -115,15 +116,28 @@ class Tube {
       pop();
     }
   }
-  //
-  // display2() {
+
+  display2() {
+    for (let i = 0; i < this.circles.length; i++) {
+      let c = this.circles[i];
+      push();
+      drawingContext.shadowBlur = 22.5;
+      drawingContext.shadowColor = color(146, 63, 242);
+      noStroke();
+      fill(146, 63, 242, this.opacity);
+      ellipse(c.x, c.y, c.size+4.5);
+      pop();
+    }
+  }
+
+  // display3() {
   //   for (let i = 0; i < this.circles.length; i++) {
   //     let c = this.circles[i];
   //     push();
-  //     drawingContext.shadowBlur = 18;
-  //     drawingContext.shadowColor = color(255, 0, 0);
   //     noStroke();
-  //     fill(255, 0, 0, this.opacity);
+  //     drawingContext.shadowBlur = 3.6;
+  //         drawingContext.shadowColor = color(255, 255, 255);
+  //     fill(255, 255, 255, this.opacity);
   //     ellipse(c.x, c.y, c.size);
   //     pop();
   //   }
