@@ -122,9 +122,9 @@ class Tube {
       let c = this.circles[i];
       push();
       drawingContext.shadowBlur = 22.5;
-      drawingContext.shadowColor = color(146, 63, 242);
+      drawingContext.shadowColor = color(117, 0, 181);
       noStroke();
-      fill(146, 63, 242, this.opacity);
+      fill(117, 0, 181, this.opacity);
       ellipse(c.x, c.y, c.size+4.5);
       pop();
     }

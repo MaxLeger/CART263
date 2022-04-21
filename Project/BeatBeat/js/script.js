@@ -1553,6 +1553,9 @@ function game() {
 
   // Displays the current score
   // fill(255, 255, 255);
+  // drawingContext.shadowBlur = 11.7;
+  // drawingContext.shadowColor = color(0, 0, 0);
+  fill(255, 255, 255)
   text('Multiplier:  x', 10, 565);
   textSize(22.5);
   text(currentMultiplier, 135, 565);
