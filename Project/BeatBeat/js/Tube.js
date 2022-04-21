@@ -6,7 +6,7 @@ class Tube {
     this.endX = endX;
     this.endY = endY;
     this.following = false;
-    // this.color = color(250, 0, 0);
+    this.color = color(0, 0, 255);
     this.opacity = 0;
     this.fadeDirection = 0;
     this.fadeSpeed = 99;
@@ -48,8 +48,12 @@ class Tube {
       if (!this.collected) {
         currentMultiplier = 1;
         success = 0;
+        road = 0;
+        currentRoad = 0;
+        roadGoal = 2;
       }
     }
+    this.colorSwitch();
   }
 
   mouseIsOver() {
@@ -122,9 +126,9 @@ class Tube {
       let c = this.circles[i];
       push();
       drawingContext.shadowBlur = 22.5;
-      drawingContext.shadowColor = color(117, 0, 181);
+      drawingContext.shadowColor = this.color;
       noStroke();
-      fill(117, 0, 181, this.opacity);
+      fill(255, 255, 255, this.opacity);
       ellipse(c.x, c.y, c.size+4.5);
       pop();
     }
@@ -167,6 +171,24 @@ class Tube {
   mouseReleased() {
     this.dragging = false;
   }
+
+  colorSwitch() {
+    if (currentMultiplier >= 1 && currentMultiplier < 10){
+      this.color = color(0, 36, 255);
+    } if (currentMultiplier >= 10 && currentMultiplier < 20){
+      this.color = color(0, 255, 255);
+    } else if (currentMultiplier >= 20 && currentMultiplier < 40) {
+      this.color = color(127, 255, 212);
+    }  else if (currentMultiplier >= 40 && currentMultiplier < 60) {
+      this.color = color(49, 255, 127);
+    }  else if (currentMultiplier >= 60 && currentMultiplier < 80) {
+      this.color = color(0, 255, 0);
+    }  else if (currentMultiplier >= 80 && currentMultiplier < 100) {
+      this.color = color(207, 18, 117);
+    }
+
+  }
+
 
 
 }

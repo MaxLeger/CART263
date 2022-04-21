@@ -1,8 +1,6 @@
 /***********************************************
 FINAL Project: BEAT-BEAT
 MGL
-
-
 ************************************************/
 
 p5.disableFriendlyErrors = true;
@@ -24,6 +22,11 @@ let music
 // let score = (iconScore + tubeScore);
 
 let score = 0;
+
+let road = 0;
+
+let currentRoad = 0;
+let roadGoal = 2;
 
 let success = 0;
 
@@ -1476,6 +1479,8 @@ let tubes = [];
 
 let backdrop;
 
+let gameBackdrop;
+
 // point of reference for the mouse location
 let mouseEllipse = {
   size: 20
@@ -1486,9 +1491,11 @@ let mouseEllipse = {
 function preload() {
   music = loadSound("assets/sounds/GorillazFeelGoodInc.mp3");
 
-  gamestart = loadImage("assets/images/gamestart.png");
+  gamestart = loadImage("assets/images/BackdropGrid_1.gif");
 
-  backdrop = loadImage("assets/images/TheDrop1.png");
+  backdrop = loadImage("assets/images/TheDrop3.png");
+
+  // gameBackdrop = loadImage("assets/images/BackdropGrid.gif");
 
 }
 
@@ -1521,6 +1528,7 @@ function statemachine() {
     title();
   } else if (state === `game`) {
     displayBackdrop();
+    // background(gameBackdrop);
     game();
     multiplierActivation();
 
@@ -1555,7 +1563,7 @@ function game() {
   // fill(255, 255, 255);
   // drawingContext.shadowBlur = 11.7;
   // drawingContext.shadowColor = color(0, 0, 0);
-  fill(255, 255, 255)
+
   text('Multiplier:  x', 10, 565);
   textSize(22.5);
   text(currentMultiplier, 135, 565);
@@ -1568,6 +1576,8 @@ function game() {
   textSize(22.5);
   text(score, 117, 590);
   textSize(22.5);
+
+
 
 }
 
