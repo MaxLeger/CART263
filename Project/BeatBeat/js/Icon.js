@@ -109,6 +109,11 @@ class Icon {
 
         success += 1;
 
+        theGoat = 5 * currentMultiplier;
+
+
+
+
         // displayScore1();
 
 

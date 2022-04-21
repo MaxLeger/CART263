@@ -1472,6 +1472,9 @@ let musicData = [
 
 ];
 
+let theGoat = 0;
+
+let pointsTexts = []; // To store currently active score texts
 
 let icons = [];
 
@@ -1532,7 +1535,7 @@ function statemachine() {
     game();
     multiplierActivation();
 
-
+    updatePoints();
 
     displayMouseEllipse();
   }
@@ -1556,6 +1559,7 @@ function game() {
   for (let i = 0; i < tubes.length; i++) {
     tubes[i].update();
   }
+
 
 
 
@@ -1585,6 +1589,25 @@ function game() {
 
 
 
+}
+
+function updatePoints() {
+  // Go through all score texts
+  for (let i = pointsTexts.length - 1; i >= 0; i--) {
+    let pointsInfo = pointsTexts[i];
+    // Display the current text
+    push();
+    fill(0, pointsInfo.opacity);
+    textSize(24);
+    text(pointsInfo.score, pointsInfo.x, pointsInfo.y);
+    pop();
+    // Reduce its opacity
+    pointsInfo.opacity -= 10;
+    // If its opacity goes below 0 remove it from the array
+    if (pointsInfo.opacity <= 0) {
+      pointsTexts.splice(i, 1);
+    }
+  }
 }
 
 
@@ -1617,9 +1640,16 @@ function mousePressed() {
     for (let i = 0; i < tubes.length; i++) {
       tubes[i].mousePressed();
     }
+    let pointsInfo = {
+    score: theGoat,
+    x: mouseX,
+    y: mouseY,
+    opacity: 255
+  }
+  pointsTexts.push(pointsInfo);
+}
 
   }
-}
 
 function keyPressed() {
   if (state === "game") {
