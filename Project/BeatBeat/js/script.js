@@ -12,15 +12,6 @@ let gamestart
 
 let music
 
-
-// let scorePerIcon = 0;
-// let scorePerTube = 0;
-
-// let iconScore = (scorePerIcon * currentMultiplier);
-// let tubeScore = (scorePerTube * currentMultiplier);
-
-// let score = (iconScore + tubeScore);
-
 let score = 0;
 
 let road = 0;
@@ -1466,10 +1457,6 @@ let musicData = [
 
 
 
-
-
-
-
 ];
 
 let theGoat = 0;
@@ -1506,7 +1493,7 @@ function preload() {
 
   endScreen = loadImage("assets/images/EndScreen.gif");
 
-  // gameBackdrop = loadImage("assets/images/BackdropGrid.gif");
+
 
 }
 
@@ -1547,16 +1534,12 @@ function statemachine() {
   } else if (state === `tuto`) {
     tutorialDisplay();
   } else if (state === `game`) {
-    displayBackdrop();
-    // background(gameBackdrop);
-    game();
 
+    displayBackdrop();
+    game();
     displayMouseEllipse();
     multiplierActivation();
-
     updatePoints();
-
-
 
   } else if (state === `ending`) {
     displayEnding();
@@ -1582,7 +1565,6 @@ function displayEnding() {
   imageMode(CENTER);
   image(endScreen, 480, 300);
 
-
   fill(255)
   strokeWeight(6.3)
   stroke(255, 229, 129)
@@ -1600,18 +1582,6 @@ function game() {
     tubes[i].update();
   }
 
-
-
-
-  // Displays the current score
-  // fill(255, 255, 255);
-  // drawingContext.shadowBlur = 11.7;
-  // drawingContext.shadowColor = color(0, 0, 0);
-
-  // fill(254, 221, 17)
-  // stroke(240,165,4)
-  // strokeWeight(4.5)
-
   fill(255)
 
   text('Multiplier: X', 38+1, 537);
@@ -1619,15 +1589,11 @@ function game() {
   text(currentMultiplier, 207, 537);
   textSize(30.6);
 
-
-
   // Displays the current score
   text('SCORE:', 38+1, 575);
   textSize(30.6);
   text(score, 162, 575);
   textSize(30.6);
-
-
 
 }
 
@@ -1658,10 +1624,7 @@ function draw() {
 
   frameRate(15);
   pixelDensity(0.477)
-
   background(211);
-
-
 
   statemachine();
 
@@ -1718,7 +1681,6 @@ function mouseReleased() {
     }
   }
 }
-
 
 // function which display a reference for the mouse location
   function displayMouseEllipse() {
