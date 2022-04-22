@@ -1,3 +1,11 @@
+/***********************************************
+FINAL Project: BEAT-BEAT
+MGL
+
+This is the Tube class oject class for the game.
+Collecting them or not influences the poins system
+************************************************/
+
 class Tube {
 
   constructor(startX, startY, endX, endY) {

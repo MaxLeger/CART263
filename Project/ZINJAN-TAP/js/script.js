@@ -1,6 +1,10 @@
 /***********************************************
 FINAL Project: BEAT-BEAT
 MGL
+
+This is the main script for the game.
+It's about collecting objects that appear on cue
+to the playing music and gaining points from it.
 ************************************************/
 
 p5.disableFriendlyErrors = true;

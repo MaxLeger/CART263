@@ -1,3 +1,11 @@
+/***********************************************
+FINAL Project: BEAT-BEAT
+MGL
+
+This is the Icon class oject class for the game.
+Collecting them or not influences the poins system
+************************************************/
+
 class Icon {
 
   constructor(x, y, size) {
