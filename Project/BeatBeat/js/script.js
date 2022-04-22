@@ -5,7 +5,7 @@ MGL
 
 p5.disableFriendlyErrors = true;
 
-let state = 'game'
+let state = 'title'
 
 
 let gamestart
@@ -1486,6 +1486,8 @@ let backdrop;
 
 let gameBackdrop;
 
+let endScreen;
+
 // point of reference for the mouse location
 let mouseEllipse = {
   size: 20
@@ -1494,13 +1496,15 @@ let mouseEllipse = {
 //Preloads the assets
 
 function preload() {
-  music = loadSound("assets/sounds/GorillazFeelGoodInc.wav");
+  music = loadSound("assets/sounds/GorillazFeelGoodInc1.wav");
 
   gamestart = loadImage("assets/images/BackdropGrid_5.gif");
 
   tutorialScreen = loadImage("assets/images/TheOnlyTutorial.png");
 
   backdrop = loadImage("assets/images/TheRealDrop.png");
+
+  endScreen = loadImage("assets/images/EndScreen.gif");
 
   // gameBackdrop = loadImage("assets/images/BackdropGrid.gif");
 
@@ -1527,7 +1531,7 @@ function setup() {
     tubes.push(tube);
   }
 
-   music.addCue(124.16, pse);
+   music.addCue(126.99, pse);
 
 }
 
@@ -1546,9 +1550,13 @@ function statemachine() {
     displayBackdrop();
     // background(gameBackdrop);
     game();
+
+    displayMouseEllipse();
     multiplierActivation();
 
     updatePoints();
+
+
 
   } else if (state === `ending`) {
     displayEnding();
@@ -1571,7 +1579,16 @@ function displayBackdrop() {
 }
 
 function displayEnding() {
-  background(0)
+  imageMode(CENTER);
+  image(endScreen, 480, 300);
+
+
+  fill(255)
+  strokeWeight(6.3)
+  stroke(255, 229, 129)
+  text(score, 480, 310);
+  textAlign(CENTER, CENTER);
+  textSize(90);
 }
 
 // Game state function
@@ -1689,6 +1706,7 @@ function keyPressed() {
     for (let i = 0; i < icons.length; i++) {
       icons[i].keyPressed();
     }
+    state = 'ending';
 
   }
 }
@@ -1703,13 +1721,14 @@ function mouseReleased() {
 
 
 // function which display a reference for the mouse location
-//   function displayMouseEllipse() {
-//   push();
-//   noStroke();
-//   fill(0, 255, 0);
-//   ellipse(mouseX, mouseY, mouseEllipse.size);
-//   pop();
-// }
+  function displayMouseEllipse() {
+  push();
+  strokeWeight(2.7)
+  stroke(255, 229, 129, 117)
+  fill(255, 255, 255, 207);
+  ellipse(mouseX, mouseY, mouseEllipse.size);
+  pop();
+}
 
 function multiplierActivation() {
   currentMultiplier = 1 + success;

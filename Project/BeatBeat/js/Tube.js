@@ -13,9 +13,6 @@ class Tube {
     this.active = true;
     this.collected = false;
     this.sizeSpeed = 0;
-
-    // this.missed = false;
-
     this.numCircles = 18;
     this.circles = [];
     for (let i = 0; i < this.numCircles; i++) {
@@ -34,7 +31,6 @@ class Tube {
     this.checkDragging();
     this.display2();
     this.display1();
-    // this.display3();
     this.opacity += this.fadeSpeed * this.fadeDirection;
     this.size += this.sizeSpeed
     if (this.fadeDirection === 1 && this.opacity >= 255) {
@@ -76,10 +72,6 @@ class Tube {
     }
   }
 
-// How to make indicate tude = missed? To reset the the multiplier?
-
-
-
   checkDragging() {
     if (this.dragging || this.mouseIsOver() && this.isKeyDown()) {
       console.log(this.mouseIsOver());
@@ -91,8 +83,7 @@ class Tube {
         let d = dist(mouseX, mouseY, c.x, c.y);
         if (d < c.size / 2) {
           if (i === this.circles.length - 1) {
-            // scorePerTube += 10;
-            // currentMultiplier += 1;
+
             score += 10 * currentMultiplier;
             theGoat = 10 * currentMultiplier;
 
@@ -135,19 +126,6 @@ class Tube {
     }
   }
 
-  // display3() {
-  //   for (let i = 0; i < this.circles.length; i++) {
-  //     let c = this.circles[i];
-  //     push();
-  //     noStroke();
-  //     drawingContext.shadowBlur = 3.6;
-  //         drawingContext.shadowColor = color(255, 255, 255);
-  //     fill(255, 255, 255, this.opacity);
-  //     ellipse(c.x, c.y, c.size);
-  //     pop();
-  //   }
-  // }
-
   mousePressed() {
     let firstCircle = this.circles[0];
     let d = dist(mouseX, mouseY, firstCircle.x, firstCircle.y);
@@ -173,8 +151,6 @@ class Tube {
     this.dragging = false;
   }
 
-  //255, 93, 44
-
   colorSwitch() {
     if (currentMultiplier >= 1 && currentMultiplier < 10){
       this.color = color(255, 114, 12);
@@ -191,7 +167,6 @@ class Tube {
     }
 
   }
-
 
 
 }

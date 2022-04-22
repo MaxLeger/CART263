@@ -7,10 +7,7 @@ class Icon {
     this.opacity = 0;
     this.fadeDirection = 0;
     this.fadeSpeed = 99;
-
     this.color = color(255, 206, 0);
-
-
     this.active = true;
     this.collected = false;
     this.sizeSpeed = 0;
@@ -21,26 +18,16 @@ class Icon {
     if (this.collected === false){
     push();
     frameRate(27)
-
     drawingContext.shadowBlur = 11.7;
     drawingContext.shadowColor = this.color;
     strokeWeight(5.4);
     stroke(255, 255, 255, this.opacity);
     noFill();
-    // fill(220, this.opacity);
     ellipse(this.x, this.y, this.size);
     pop();
 
   }
 }
-
-
-  // displayScore1() {
-  //   if (this.collected === true) {
-  //     text(5 * currentMultiplier, mouseX+30, mouseY+30);
-  //     textSize(22.5);
-  //   }
-  // }
 
 
   mouseIsOver() {
@@ -87,19 +74,6 @@ class Icon {
 
   mousePressed() {
 
-
-
-    // to make an icon = active if opacity > 0
-
-
-    // How to make Icon = missed?
-    // I have this way potentianaly:
-
-    // if (this.active === true && this opacity = 1 && this.fadeDirection = -1) {
-    //   icon.missed = true
-    // }
-
-
     // Only respond to the mouse click if the shape is active
     // and the mouse is in the shape
     if (this.active === true && this.opacity > 0 && this.collected === false && this.mouseIsOver()) {
@@ -112,11 +86,6 @@ class Icon {
         theGoat = 5 * currentMultiplier;
 
 
-
-
-        // displayScore1();
-
-
       } else if (this.opacity > 90) {
         score += 1 * currentMultiplier;
 
@@ -125,8 +94,6 @@ class Icon {
       }
       this.collected = true
     }
-    // Makes the object collected
-    // If Icon = missed -> reset multiplier
 
   }
 
@@ -148,8 +115,6 @@ class Icon {
       }
       this.collected = true
     }
-    // Makes the object collected
-
   }
 
   colorSwitch() {
