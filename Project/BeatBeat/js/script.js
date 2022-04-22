@@ -27,8 +27,7 @@ let currentMultiplier = 1; // Mulpliplies the points gained
 // X9 = 256 collected
 
 //Components of the Tube array:
-let tubeMusicData = [
-  {
+let tubeMusicData = [{
     cue: 8.20, // time of the music
     startX: 556, // Starting X position
     startY: 171, // Starting Y position
@@ -86,10 +85,10 @@ let tubeMusicData = [
     endY: 390
   },
 
-//part2
+  //part2
 
 
-{
+  {
     cue: (5.1 + 64.04),
     startX: 450,
     startY: 515,
@@ -150,8 +149,7 @@ let tubeMusicData = [
 ]
 
 //Components of the Icon array:
-let musicData = [
-  {
+let musicData = [{
     cue: 5.21, // cue for the music
     x: 110, // X location
     y: 131, // Y location
@@ -196,20 +194,20 @@ let musicData = [
     size: 117
   },
   {
-    cue: 9.90 ,
+    cue: 9.90,
     x: 787,
     y: 297,
     size: 117
   },
   {
-    cue: 10.37 ,
+    cue: 10.37,
     x: 787,
     y: 396,
     size: 117
 
   },
   {
-    cue: 10.56 ,
+    cue: 10.56,
     x: 787,
     y: 513,
     size: 117
@@ -221,7 +219,7 @@ let musicData = [
     size: 117
   },
   {
-    cue: 11.26 ,
+    cue: 11.26,
     x: 612,
     y: 513,
     size: 117
@@ -359,49 +357,49 @@ let musicData = [
 
   {
     cue: 27.09,
-    x: 126+40,
+    x: 126 + 40,
     y: 458,
     size: 180
   },
   {
     cue: 28.09,
-    x: 722+90,
+    x: 722 + 90,
     y: 458,
     size: 180
   },
   {
     cue: 29.09,
-    x: 126+40,
+    x: 126 + 40,
     y: 258,
     size: 180
   },
   {
     cue: 29.79,
-    x: 722+90,
+    x: 722 + 90,
     y: 257,
     size: 180
   },
   {
     cue: 30.72,
-    x: 126+40,
+    x: 126 + 40,
     y: 458,
     size: 180
   },
   {
     cue: 31.74,
-    x: 722+90,
+    x: 722 + 90,
     y: 458,
     size: 180
   },
   {
     cue: 32.63,
-    x: 126+40,
+    x: 126 + 40,
     y: 117,
     size: 180
   },
   {
     cue: 33.00,
-    x: 722+90,
+    x: 722 + 90,
     y: 117,
     size: 180
   },
@@ -432,25 +430,25 @@ let musicData = [
   },
   {
     cue: 35.34,
-    x: 381+30,
+    x: 381 + 30,
     y: 200,
     size: 117
   },
   {
     cue: 35.54,
-    x: 297+30,
+    x: 297 + 30,
     y: 200,
     size: 117
   },
   {
     cue: 35.74,
-    x: 217+30,
+    x: 217 + 30,
     y: 200,
     size: 117
   },
   {
     cue: 36.09,
-    x: 127+40,
+    x: 127 + 40,
     y: 270,
     size: 117
   },
@@ -605,50 +603,50 @@ let musicData = [
   {
     cue: 49.8,
     x: 250,
-    y: 490-40,
+    y: 490 - 40,
     size: 117
   },
 
   {
     cue: 50.13,
     x: 400,
-    y: 360-40,
+    y: 360 - 40,
     size: 117
   },
   {
     cue: 51,
     x: 550,
-    y: 230-40,
+    y: 230 - 40,
     size: 117
   },
   {
     cue: 51.5,
     x: 660,
-    y: 140-40,
+    y: 140 - 40,
     size: 117
   },
   {
     cue: 52.04,
     x: 730,
-    y: 200-40,
+    y: 200 - 40,
     size: 117
   },
   {
     cue: 52.4,
     x: 730,
-    y: 260-40,
+    y: 260 - 40,
     size: 117
   },
   {
     cue: 52.8,
     x: 800,
-    y: 320-40,
+    y: 320 - 40,
     size: 117
   },
   {
     cue: 52.8,
     x: 800,
-    y: 320-40,
+    y: 320 - 40,
     size: 117
   },
 
@@ -777,10 +775,10 @@ let musicData = [
   },
 
 
-//part2
+  //part2
 
 
-{
+  {
     cue: (1.41 + 64.04),
     x: 341,
     y: 207,
@@ -1046,9 +1044,9 @@ let musicData = [
   },
 
 
-//Part3
+  //Part3
 
-{
+  {
     cue: 0.09 + 64.04 + 31.05,
     x: 655,
     y: 230,
@@ -1154,37 +1152,37 @@ let musicData = [
 
   {
     cue: 8.05 + 64.04 + 31.05,
-    x: 570+30,
+    x: 570 + 30,
     y: 4850,
     size: 127
   },
   {
     cue: 8.2 + 64.04 + 31.05,
-    x: 520+30,
+    x: 520 + 30,
     y: 430,
     size: 127
   },
   {
     cue: 8.35 + 64.04 + 31.05,
-    x: 480+30,
+    x: 480 + 30,
     y: 360,
     size: 127
   },
   {
     cue: 8.5 + 64.04 + 31.05,
-    x: 430+30,
+    x: 430 + 30,
     y: 290,
     size: 135
   },
   {
     cue: 8.65 + 64.04 + 31.05,
-    x: 380+30,
+    x: 380 + 30,
     y: 220,
     size: 135
   },
   {
     cue: 8.8 + 64.04 + 31.05,
-    x: 330+30,
+    x: 330 + 30,
     y: 150,
     size: 135
   },
@@ -1213,170 +1211,170 @@ let musicData = [
     size: 117
   },
   {
-    cue: 10.4  + 64.04 + 31.05,
+    cue: 10.4 + 64.04 + 31.05,
     x: 160,
     y: 500,
     size: 117
   },
   {
-    cue: 10.55  + 64.04 + 31.05,
+    cue: 10.55 + 64.04 + 31.05,
     x: 220,
     y: 500,
     size: 117
   },
   {
-    cue: 10.7  + 64.04 + 31.05,
+    cue: 10.7 + 64.04 + 31.05,
     x: 280,
     y: 500,
     size: 117
   },
 
   {
-    cue: 11.2  + 64.04 + 31.05,
+    cue: 11.2 + 64.04 + 31.05,
     x: 600,
     y: 500,
     size: 117
   },
   {
-    cue: 12  + 64.04 + 31.05,
+    cue: 12 + 64.04 + 31.05,
     x: 740,
     y: 500,
     size: 117
   },
   {
-    cue: 12.17  + 64.04 + 31.05,
+    cue: 12.17 + 64.04 + 31.05,
     x: 825,
     y: 500,
     size: 117
   },
   {
-    cue: 13.05  + 64.04 + 31.05,
+    cue: 13.05 + 64.04 + 31.05,
     x: 825,
     y: 384,
     size: 117
   },
   {
-    cue: 13.13  + 64.04 + 31.05,
+    cue: 13.13 + 64.04 + 31.05,
     x: 825,
     y: 314,
     size: 117
   },
 
   {
-    cue: 14.45  + 64.04 + 31.05,
+    cue: 14.45 + 64.04 + 31.05,
     x: 200,
     y: 317,
     size: 160
   },
   {
-    cue: 15.04  + 64.04 + 31.05,
+    cue: 15.04 + 64.04 + 31.05,
     x: 320,
     y: 317,
     size: 117
   },
   {
-    cue: 15.17  + 64.04 + 31.05,
+    cue: 15.17 + 64.04 + 31.05,
     x: 380,
     y: 317,
     size: 117
   },
   {
-    cue: 15.23  + 64.04 + 31.05,
+    cue: 15.23 + 64.04 + 31.05,
     x: 480,
     y: 317,
     size: 117
   },
   {
-    cue: 16.1  + 64.04 + 31.05,
+    cue: 16.1 + 64.04 + 31.05,
     x: 540,
     y: 317,
     size: 117
   },
   {
-    cue: 16.25  + 64.04 + 31.05,
+    cue: 16.25 + 64.04 + 31.05,
     x: 640,
     y: 317,
     size: 117
   },
   {
-    cue: 17.04  + 64.04 + 31.05,
+    cue: 17.04 + 64.04 + 31.05,
     x: 700,
     y: 317,
     size: 117
   },
 
   {
-    cue: 18.18  + 64.04 + 31.05,
+    cue: 18.18 + 64.04 + 31.05,
     x: 800,
     y: 155,
     size: 117
   },
 
   {
-    cue: 19  + 64.04 + 31.05,
+    cue: 19 + 64.04 + 31.05,
     x: 800,
     y: 430,
     size: 117
   },
 
   {
-    cue: 20  + 64.04 + 31.05,
+    cue: 20 + 64.04 + 31.05,
     x: 675,
     y: 293,
     size: 117
   },
   {
-    cue: 20.3  + 64.04 + 31.05,
+    cue: 20.3 + 64.04 + 31.05,
     x: 540,
     y: 293,
     size: 117
   },
   {
-    cue: 21.06  + 64.04 + 31.05,
+    cue: 21.06 + 64.04 + 31.05,
     x: 450,
     y: 293,
     size: 117
   },
   {
-    cue: 21.12  + 64.04 + 31.05,
+    cue: 21.12 + 64.04 + 31.05,
     x: 350,
     y: 193,
     size: 132
   },
   {
-    cue: 21.2  + 64.04 + 31.05,
+    cue: 21.2 + 64.04 + 31.05,
     x: 350,
     y: 393,
     size: 132
   },
 
   {
-    cue: 21.75  + 64.04 + 31.05,
+    cue: 21.75 + 64.04 + 31.05,
     x: 568,
     y: 293,
     size: 117
   },
   {
-    cue: 22.12  + 64.04 + 31.05,
+    cue: 22.12 + 64.04 + 31.05,
     x: 700,
     y: 293,
     size: 117
   },
   {
-    cue: 22.27  + 64.04 + 31.05,
+    cue: 22.27 + 64.04 + 31.05,
     x: 822,
     y: 123,
     size: 140
   },
   {
-    cue: 23.1  + 64.04 + 31.05,
+    cue: 23.1 + 64.04 + 31.05,
     x: 822,
     y: 460,
     size: 140
   },
 
   {
-    cue: 24  + 64.04 + 31.05,
+    cue: 24 + 64.04 + 31.05,
     x: 620,
     y: 460,
     size: 140
@@ -1449,8 +1447,6 @@ let musicData = [
     size: 140
   },
 
-
-
 ];
 
 let scoreIndicator = 0; // Points for display on click
@@ -1504,7 +1500,7 @@ function setup() {
   for (let i = 0; i < musicData.length; i++) {
     let data = musicData[i];
     let icon = new Icon(data.x, data.y, data.size);
-    music.addCue(data.cue, function () {
+    music.addCue(data.cue, function() {
       icon.fadeDirection = 1; // Makes the icon appear
     })
     icons.push(icon);
@@ -1515,17 +1511,15 @@ function setup() {
   for (let i = 0; i < tubeMusicData.length; i++) {
     let data = tubeMusicData[i];
     let tube = new Tube(data.startX, data.startY, data.endX, data.endY);
-    music.addCue(data.cue, function () {
+    music.addCue(data.cue, function() {
       tube.fadeDirection = 1; // Makes the tube appear
     })
     tubes.push(tube);
   }
-
-   music.addCue(126.99, endTransition); // Activate the function that transitions to the ending
-
+  music.addCue(126.99, endTransition); // Activate the function that transitions to the ending
 }
 
-function endTransition(){
+function endTransition() {
   music.pause(); //Stops the music
   state = 'ending'; // Changes the state to the ending
 }
@@ -1537,13 +1531,11 @@ function statemachine() {
   } else if (state === `tuto`) {
     tutorialDisplay();
   } else if (state === `game`) {
-
     displayGameBackdrop();
     game();
     displayMouseEllipse();
     multiplierActivation();
     updatePoints();
-
   } else if (state === `ending`) {
     displayEnding();
   }
@@ -1592,21 +1584,18 @@ function game() {
   for (let i = 0; i < tubes.length; i++) {
     tubes[i].update();
   }
-
-
   //Displays player's current score multplying factor
   fill(255)
-  text('Multiplier: X', 38+1, 537);
+  text('Multiplier: X', 38 + 1, 534);
   textSize(30.6);
-  text(currentMultiplier, 207, 537);
+  text(currentMultiplier, 207, 534);
   textSize(30.6);
 
   // Displays the player's current score
-  text('SCORE:', 38+1, 575);
+  text('SCORE:', 38 + 1, 572);
   textSize(30.6);
-  text(score, 162, 575);
+  text(score, 162, 572);
   textSize(30.6);
-
 }
 
 // Function that updates the  points displayed on screen right after the player clicks
@@ -1620,7 +1609,7 @@ function updatePoints() {
     strokeWeight(6.3)
     stroke(171)
     textSize(24);
-    text(pointsInfo.score, pointsInfo.x +15, pointsInfo.y);
+    text(pointsInfo.score, pointsInfo.x + 15, pointsInfo.y);
     text('+', pointsInfo.x, pointsInfo.y);
     pop();
     // Reduce its opacity
@@ -1634,7 +1623,6 @@ function updatePoints() {
 
 
 function draw() {
-
   // Accelerates the program (Necessary)
   frameRate(15);
   pixelDensity(0.477)
@@ -1643,7 +1631,6 @@ function draw() {
 
   //Draws the statemachine
   statemachine();
-
 }
 
 function mousePressed() {
@@ -1671,15 +1658,14 @@ function mousePressed() {
     }
     // Indicates a change in the value properties of the displayed point info
     let pointsInfo = {
-    score: scoreIndicator,
-    x: mouseX,
-    y: mouseY,
-    opacity: 255
+      score: scoreIndicator,
+      x: mouseX,
+      y: mouseY,
+      opacity: 255
+    }
+    pointsTexts.push(pointsInfo);
   }
-  pointsTexts.push(pointsInfo);
 }
-
-  }
 
 function keyPressed() {
   //Press a key to transition to the next state
@@ -1704,7 +1690,7 @@ function mouseReleased() {
 }
 
 // function which display a reference for the mouse location
-  function displayMouseEllipse() {
+function displayMouseEllipse() {
   push();
   strokeWeight(2.7)
   stroke(255, 229, 129, 117)
