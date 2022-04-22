@@ -120,6 +120,8 @@ class Icon {
       } else if (this.opacity > 90) {
         score += 1 * currentMultiplier;
 
+        theGoat = 1 * currentMultiplier;
+
       }
       this.collected = true
     }

@@ -94,6 +94,7 @@ class Tube {
             // scorePerTube += 10;
             // currentMultiplier += 1;
             score += 10 * currentMultiplier;
+            theGoat = 10 * currentMultiplier;
 
             success += 1;
             this.dragging = false;

@@ -5,7 +5,7 @@ MGL
 
 p5.disableFriendlyErrors = true;
 
-let state = 'title'
+let state = 'game'
 
 
 let gamestart
@@ -1474,6 +1474,8 @@ let musicData = [
 
 let theGoat = 0;
 
+let tutorialScreen;
+
 let pointsTexts = []; // To store currently active score texts
 
 let icons = [];
@@ -1492,11 +1494,13 @@ let mouseEllipse = {
 //Preloads the assets
 
 function preload() {
-  music = loadSound("assets/sounds/GorillazFeelGoodInc.mp3");
+  music = loadSound("assets/sounds/GorillazFeelGoodInc.wav");
 
-  gamestart = loadImage("assets/images/BackdropGrid_3.gif");
+  gamestart = loadImage("assets/images/BackdropGrid_5.gif");
 
-  backdrop = loadImage("assets/images/TheDrop3.png");
+  tutorialScreen = loadImage("assets/images/TheOnlyTutorial.png");
+
+  backdrop = loadImage("assets/images/TheRealDrop.png");
 
   // gameBackdrop = loadImage("assets/images/BackdropGrid.gif");
 
@@ -1523,12 +1527,21 @@ function setup() {
     tubes.push(tube);
   }
 
+   music.addCue(124.16, pse);
+
+}
+
+function pse(){
+  music.pause();
+  state = 'ending';
 }
 
 // Indication of the state
 function statemachine() {
   if (state === `title`) {
     title();
+  } else if (state === `tuto`) {
+    tutorialDisplay();
   } else if (state === `game`) {
     displayBackdrop();
     // background(gameBackdrop);
@@ -1537,7 +1550,8 @@ function statemachine() {
 
     updatePoints();
 
-    displayMouseEllipse();
+  } else if (state === `ending`) {
+    displayEnding();
   }
 }
 
@@ -1546,9 +1560,18 @@ function title() {
   image(gamestart, 480, 300);
 }
 
+function tutorialDisplay() {
+  imageMode(CENTER);
+  image(tutorialScreen, 480, 300);
+}
+
 function displayBackdrop() {
   imageMode(CENTER);
   image(backdrop, 480, 300);
+}
+
+function displayEnding() {
+  background(0)
 }
 
 // Game state function
@@ -1572,20 +1595,20 @@ function game() {
   // stroke(240,165,4)
   // strokeWeight(4.5)
 
-  fill(117)
+  fill(255)
 
-  text('Multiplier:  X', 38+1, 537);
-  textSize(32.4);
-  text(currentMultiplier, 226+1, 537);
-  textSize(32.4);
+  text('Multiplier: X', 38+1, 537);
+  textSize(30.6);
+  text(currentMultiplier, 207, 537);
+  textSize(30.6);
 
 
 
   // Displays the current score
   text('SCORE:', 38+1, 575);
-  textSize(32.4);
-  text(score, 196+1, 575);
-  textSize(32.4);
+  textSize(30.6);
+  text(score, 162, 575);
+  textSize(30.6);
 
 
 
@@ -1597,9 +1620,12 @@ function updatePoints() {
     let pointsInfo = pointsTexts[i];
     // Display the current text
     push();
-    fill(0, pointsInfo.opacity);
+    fill(255, pointsInfo.opacity);
+    strokeWeight(6.3)
+    stroke(171)
     textSize(24);
-    text(pointsInfo.score, pointsInfo.x, pointsInfo.y);
+    text(pointsInfo.score, pointsInfo.x +15, pointsInfo.y);
+    text('+', pointsInfo.x, pointsInfo.y);
     pop();
     // Reduce its opacity
     pointsInfo.opacity -= 10;
@@ -1626,14 +1652,18 @@ function draw() {
 
 function mousePressed() {
   //Click to transition to the next state
-  if (state === "title") {
+  if (state === 'title') {
+    state = 'tuto';
+  }
+
+  else if (state === 'tuto') {
     state = 'game';
   }
-  if (!music.isPlaying()) {
+  if (!music.isPlaying() && state === 'game') {
     music.loop();
   }
 
-  if (state === "game") {
+  if (state === 'game') {
     for (let i = 0; i < icons.length; i++) {
       icons[i].mousePressed();
     }
@@ -1652,6 +1682,9 @@ function mousePressed() {
   }
 
 function keyPressed() {
+  if (state === 'title') {
+    state = 'tuto';
+  }
   if (state === "game") {
     for (let i = 0; i < icons.length; i++) {
       icons[i].keyPressed();
@@ -1668,14 +1701,15 @@ function mouseReleased() {
   }
 }
 
+
 // function which display a reference for the mouse location
-  function displayMouseEllipse() {
-  push();
-  noStroke();
-  fill(0, 255, 0);
-  ellipse(mouseX, mouseY, mouseEllipse.size);
-  pop();
-}
+//   function displayMouseEllipse() {
+//   push();
+//   noStroke();
+//   fill(0, 255, 0);
+//   ellipse(mouseX, mouseY, mouseEllipse.size);
+//   pop();
+// }
 
 function multiplierActivation() {
   currentMultiplier = 1 + success;
