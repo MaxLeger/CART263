@@ -8,20 +8,13 @@ p5.disableFriendlyErrors = true;
 let state = 'title'
 
 
-let gamestart
+// Establishing values:
 
-let music
+let score = 0; // TThe he player's current score
 
-let score = 0;
+let success = 0; // The ammount of times a player consistently collects objects perfectly
 
-let road = 0;
-
-let currentRoad = 0;
-let roadGoal = 2;
-
-let success = 0;
-
-let currentMultiplier = 1;
+let currentMultiplier = 1; // Mulpliplies the points gained
 
 //Multiplier threshold :
 // X2 = 1 collected
@@ -33,13 +26,14 @@ let currentMultiplier = 1;
 // X8 = 128 collected
 // X9 = 256 collected
 
+//Components of the Tube array:
 let tubeMusicData = [
   {
-    cue: 8.20,
-    startX: 556,
-    startY: 171,
-    endX: 787,
-    endY: 171
+    cue: 8.20, // time of the music
+    startX: 556, // Starting X position
+    startY: 171, // Starting Y position
+    endX: 787, // Ending X position
+    endY: 171 // Ending Y position
   },
 
   {
@@ -155,13 +149,13 @@ let tubeMusicData = [
 
 ]
 
-
+//Components of the Icon array:
 let musicData = [
   {
-    cue: 5.21,
-    x: 110,
-    y: 131,
-    size: 117
+    cue: 5.21, // cue for the music
+    x: 110, // X location
+    y: 131, // Y location
+    size: 117 // Icon size
   },
   {
     cue: 5.8,
@@ -1459,15 +1453,21 @@ let musicData = [
 
 ];
 
-let theGoat = 0;
-
-let tutorialScreen;
+let scoreIndicator = 0; // Points for display on click
 
 let pointsTexts = []; // To store currently active score texts
 
-let icons = [];
+let icons = []; // Stores Icon array
 
-let tubes = [];
+let tubes = []; // Stores Tube array
+
+// Loaded Items:
+
+let tutorialScreen;
+
+let gamestart
+
+let music
 
 let backdrop;
 
@@ -1483,6 +1483,7 @@ let mouseEllipse = {
 //Preloads the assets
 
 function preload() {
+
   music = loadSound("assets/sounds/GorillazFeelGoodInc1.wav");
 
   gamestart = loadImage("assets/images/BackdropGrid_5.gif");
@@ -1493,49 +1494,51 @@ function preload() {
 
   endScreen = loadImage("assets/images/EndScreen.gif");
 
-
-
 }
 
 function setup() {
   createCanvas(960, 600);
 
+  // Set's up the array that will activate an Icon at specific X and Y location on a specific musical cue.
+
   for (let i = 0; i < musicData.length; i++) {
     let data = musicData[i];
     let icon = new Icon(data.x, data.y, data.size);
     music.addCue(data.cue, function () {
-      icon.fadeDirection = 1;
+      icon.fadeDirection = 1; // Makes the icon appear
     })
     icons.push(icon);
   }
+
+  // Set's up the array that will activate a Tube starting and ending at a specific X and Y location on a specific musical cue.
 
   for (let i = 0; i < tubeMusicData.length; i++) {
     let data = tubeMusicData[i];
     let tube = new Tube(data.startX, data.startY, data.endX, data.endY);
     music.addCue(data.cue, function () {
-      tube.fadeDirection = 1;
+      tube.fadeDirection = 1; // Makes the tube appear
     })
     tubes.push(tube);
   }
 
-   music.addCue(126.99, pse);
+   music.addCue(126.99, endTransition); // Activate the function that transitions to the ending
 
 }
 
-function pse(){
-  music.pause();
-  state = 'ending';
+function endTransition(){
+  music.pause(); //Stops the music
+  state = 'ending'; // Changes the state to the ending
 }
 
-// Indication of the state
+// Indication of the state and their associated functions
 function statemachine() {
   if (state === `title`) {
-    title();
+    titleDisplay();
   } else if (state === `tuto`) {
     tutorialDisplay();
   } else if (state === `game`) {
 
-    displayBackdrop();
+    displayGameBackdrop();
     game();
     displayMouseEllipse();
     multiplierActivation();
@@ -1546,25 +1549,30 @@ function statemachine() {
   }
 }
 
-function title() {
+// Displays the titlescreen
+function titleDisplay() {
   imageMode(CENTER);
   image(gamestart, 480, 300);
 }
 
+// Displays the tutorial screen
 function tutorialDisplay() {
   imageMode(CENTER);
   image(tutorialScreen, 480, 300);
 }
 
-function displayBackdrop() {
+// Displays the game background
+function displayGameBackdrop() {
   imageMode(CENTER);
   image(backdrop, 480, 300);
 }
 
+// Displays the ending screen
 function displayEnding() {
   imageMode(CENTER);
   image(endScreen, 480, 300);
 
+  // Displays the player's final score
   fill(255)
   strokeWeight(6.3)
   stroke(255, 229, 129)
@@ -1575,21 +1583,25 @@ function displayEnding() {
 
 // Game state function
 function game() {
+
+  // Updates the state of the Isons within the array
   for (let i = 0; i < icons.length; i++) {
     icons[i].update();
   }
+  // Updates the state of the Tubes within the array
   for (let i = 0; i < tubes.length; i++) {
     tubes[i].update();
   }
 
-  fill(255)
 
+  //Displays player's current score multplying factor
+  fill(255)
   text('Multiplier: X', 38+1, 537);
   textSize(30.6);
   text(currentMultiplier, 207, 537);
   textSize(30.6);
 
-  // Displays the current score
+  // Displays the player's current score
   text('SCORE:', 38+1, 575);
   textSize(30.6);
   text(score, 162, 575);
@@ -1597,6 +1609,7 @@ function game() {
 
 }
 
+// Function that updates the  points displayed on screen right after the player clicks
 function updatePoints() {
   // Go through all score texts
   for (let i = pointsTexts.length - 1; i >= 0; i--) {
@@ -1622,10 +1635,13 @@ function updatePoints() {
 
 function draw() {
 
+  // Accelerates the program (Necessary)
   frameRate(15);
   pixelDensity(0.477)
+
   background(211);
 
+  //Draws the statemachine
   statemachine();
 
 }
@@ -1635,23 +1651,27 @@ function mousePressed() {
   if (state === 'title') {
     state = 'tuto';
   }
-
+  //Click to transition to the next state
   else if (state === 'tuto') {
     state = 'game';
   }
+  // Starts playing the music after the tutorial sequence
   if (!music.isPlaying() && state === 'game') {
     music.loop();
   }
-
+  //  The different effects of mousePressed within the game state:
   if (state === 'game') {
+    //The function that collects the Icons
     for (let i = 0; i < icons.length; i++) {
       icons[i].mousePressed();
     }
+    //The function that collects the Icons
     for (let i = 0; i < tubes.length; i++) {
       tubes[i].mousePressed();
     }
+    // Indicates a change in the value properties of the displayed point info
     let pointsInfo = {
-    score: theGoat,
+    score: scoreIndicator,
     x: mouseX,
     y: mouseY,
     opacity: 255
@@ -1662,18 +1682,19 @@ function mousePressed() {
   }
 
 function keyPressed() {
+  //Press a key to transition to the next state
   if (state === 'title') {
     state = 'tuto';
   }
+  // Allows the player to collect Icons with an alternative method
   if (state === "game") {
     for (let i = 0; i < icons.length; i++) {
       icons[i].keyPressed();
     }
-    state = 'ending';
-
   }
 }
 
+// function verifying if the player is dragging throught the tube applying for all the tubes in the array
 function mouseReleased() {
   if (state === "game") {
     for (let i = 0; i < tubes.length; i++) {
@@ -1692,6 +1713,7 @@ function mouseReleased() {
   pop();
 }
 
+// Allows for the currentMultiplier to change its value upon success
 function multiplierActivation() {
   currentMultiplier = 1 + success;
 }
